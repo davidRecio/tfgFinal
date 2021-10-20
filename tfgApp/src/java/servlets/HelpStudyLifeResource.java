@@ -6,6 +6,7 @@
 package servlets;
 
 import herramienta.scraper.Scraper;
+import java.util.ArrayList;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
@@ -47,7 +48,26 @@ public class HelpStudyLifeResource {
 
 //       http= "https://www.comunidad.madrid/servicios/educacion/localizacion-universidades-madrilenas";
        http="https://www.descubremadrid.com/listado-completo-de-todas-las-universidades-publicas-y-privadas-en-madrid/#Universidades_Publicas_en_Madrid";
-      return scrp.obtenerTitulo(http);
+       
+      ArrayList etiquetasElementos = new ArrayList();
+        ArrayList tiposElementos = new ArrayList();
+                ArrayList separadores= new ArrayList();
+                ArrayList<ArrayList<String>> resultado= new ArrayList();
+//       etiquetasElementos.add("h3");
+//       tiposElementos.add("tag");
+//       separadores.add("Universidad");
+//       
+//        etiquetasElementos.add("li");
+//       tiposElementos.add("tag");
+//       separadores.add("Titulaciones");
+//       
+         etiquetasElementos.add("img.is-logo-image.lazyloaded");
+       tiposElementos.add("class");
+       separadores.add("");
+       
+      resultado= scrp.obtenerTitulo(http,etiquetasElementos,tiposElementos,separadores);
+ 
+      return resultado.get(0).get(0);
 
     }
     @GET

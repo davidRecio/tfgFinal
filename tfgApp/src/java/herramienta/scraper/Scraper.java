@@ -5,8 +5,13 @@
  */
 package herramienta.scraper;
 
+import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader;
+import herramientas.HerramientasTrasformaciones;
 import java.io.IOException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -58,7 +63,85 @@ public static Document getHtmlDocument(String url) {
 	    }
     return doc;
 }
-       public String obtenerTitulo(String http){
+       public ArrayList<ArrayList <String>> obtenerTitulo(String http,ArrayList<String> etiquetasElementos,ArrayList<String> tiposElementos, ArrayList<String>separadores){
+        ArrayList <ArrayList <String>> elementos = new ArrayList();
+        String elementoData = "nada";
+      HerramientasTrasformaciones hT = new HerramientasTrasformaciones();
+     
+        
+        //automatizar los select
+      
+        if (getStatusConnectionCode(http) == 200) {
+			
+            // Obtengo el HTML de la web en un objeto Document
+            Document document = getHtmlDocument(http);
+			
+            // Busco todas las entradas que estan dentro de: 
+            //String selection="div.entry-content";
+//             Elements entradas =   document.select(selection);
+            String selection="div.navigation-branding";
+            Elements entradas =   document.select(selection).select("div.sticky-navigation-logo").select("img.is-logo-image");
+         String imageSRC = entradas.get(1).attr("src");
+            System.out.println("src= "+imageSRC);
+            System.out.println("Número de entradas en la página: "+entradas.size()+"\n");
+            
+            // Paseo cada una de las entradas
+            
+              for(  int i=0; i<etiquetasElementos.size(); i++){
+              
+               for (Element elem : entradas) {
+                // Con el método "text()" obtengo el contenido que hay dentro de las etiquetas HTML
+                // Con el método "toString()" obtengo todo el HTML con etiquetas incluidas
+                 switch(tiposElementos.get(i).toString()){
+                 
+                     case "tag":{
+                            System.out.println(etiquetasElementos.get(i));
+                         elementoData =  elem.getElementsByTag(etiquetasElementos.get(i)).text();
+                                  System.out.println(elementoData);
+                     break;
+                     }
+                       case "class":{
+                         System.out.println(etiquetasElementos.get(i));
+                         elementoData =  elem.getElementsByClass(etiquetasElementos.get(i)).text();
+                            System.out.println("aa"+elementoData);       
+                     break;
+                     }
+                  
+                 }
+                 
+                    }
+                    
+                    if(separadores.size()>0){
+                      
+//                   System.out.println(elementoData.split(separadores.get(i).toString())[1]);
+                        ArrayList<String> aux = new ArrayList();
+                        aux=hT.ArrayToArrayList(elementoData.split(separadores.get(i)));
+                        
+                    elementos.add(aux);
+             
+      
+         
+                      
+                    }
+                       
+              }
+        
+        }else{
+            System.out.println("El Status Code no es OK es: "+getStatusConnectionCode(http));
+            ArrayList error = new ArrayList();
+            error.add("El Status Code no es OK es: "+getStatusConnectionCode(http));
+        return error;
+    
+         } 
+         
+        return elementos;
+       }
+}
+		
+
+
+        
+    /*    
 //         
 //         try {
 //       // Here we create a document object and use JSoup to fetch the website
@@ -104,5 +187,7 @@ public static Document getHtmlDocument(String url) {
         return getStatusConnectionCode(http)+"";
     
          }   
-       
-}
+ */
+        
+        
+
