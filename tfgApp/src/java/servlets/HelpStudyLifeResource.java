@@ -53,6 +53,9 @@ public class HelpStudyLifeResource {
         ArrayList tiposElementos = new ArrayList();
                 ArrayList separadores= new ArrayList();
                 ArrayList<ArrayList<String>> resultado= new ArrayList();
+                 ArrayList<ArrayList<String>> profundidad= new ArrayList();
+                 ArrayList<String> profundidadElemento1 = new ArrayList();
+                 
 //       etiquetasElementos.add("h3");
 //       tiposElementos.add("tag");
 //       separadores.add("Universidad");
@@ -61,11 +64,16 @@ public class HelpStudyLifeResource {
 //       tiposElementos.add("tag");
 //       separadores.add("Titulaciones");
 //       
-         etiquetasElementos.add("img.is-logo-image.lazyloaded");
-       tiposElementos.add("class");
-       separadores.add("");
+         etiquetasElementos.add("scr");
+       tiposElementos.add("attr");
+       separadores.add("<#>");
+       //"div.navigation-branding"->
+       profundidadElemento1.add("div.navigation-branding");
+       profundidadElemento1.add("div.sticky-navigation-logo");
+       profundidadElemento1.add("img.is-logo-image");
        
-      resultado= scrp.obtenerTitulo(http,etiquetasElementos,tiposElementos,separadores);
+       profundidad.add(profundidadElemento1);
+      resultado= scrp.obtenerTitulo(http,etiquetasElementos,tiposElementos,separadores,profundidad);
  
       return resultado.get(0).get(0);
 
