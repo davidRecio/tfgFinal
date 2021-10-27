@@ -1,0 +1,38 @@
+Opciones atener en cuenta
+
+parte estudantil
+
+eleccion de carrera
+	personalidad
+	aptitudes
+	habilidades
+	Materias impartidas respecto a la carga sobre las bases
+	oferta academica
+	salidas o especializciones
+	fluctuaciones en el mercado
+	presion
+	responsabilidad
+
+estudio
+
+	variables
+		motivacion de la signatura
+		interes de la asiginatura
+		habilidades y fortalezas aplicadas a estas materias para el desmpeño de la misma
+		dependencia a lo escogido
+		presion
+		responsabilidad
+
+	elementos
+		horario
+		examenes
+		practicas
+		tiempò de estudio
+
+
+	herramientas
+		picos de intensidad
+		ayudas al reparto de tiempos
+		medicion del progreso
+		reparto de limites estudiantiles
+		agenda de reuniones

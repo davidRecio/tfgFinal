@@ -1,0 +1,222 @@
+%% LyX 2.3.5.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{babel}
+\begin{document}
+\begin{doublespace}
+\begin{center}
+{\LARGE{}UNIVERSIDAD SAN PABLO - CEU}{\LARGE\par}
+\par\end{center}
+
+\begin{center}
+{\LARGE{}ESCUELA POLITÉCNICA SUPERIOR}{\LARGE\par}
+\par\end{center}
+
+\begin{center}
+{\LARGE{}GRADO EN INGENIERÍA DE SISTEMAS DE INFORMACIÓN }{\LARGE\par}
+\par\end{center}
+\end{doublespace}
+
+\begin{center}
+\includegraphics{../img/ceu}
+\par\end{center}
+
+\begin{doublespace}
+\begin{center}
+{\large{}Diseño e Implementación de una arquitectura RESTful para
+gestión de la vida diaria de un estudiante de otro lugar }{\large\par}
+\par\end{center}
+
+\begin{center}
+\textbf{\large{}Design and Implementation of a RESTful architecture
+for day-to-day management of a student from another place}{\large\par}
+\par\end{center}
+\end{doublespace}
+
+\begin{center}
+{\large{}Autor: David Recio Arnés}{\large\par}
+\par\end{center}
+
+\begin{center}
+{\large{}Tutor: Sergio Saugar García}{\large\par}
+\par\end{center}
+
+\begin{center}
+Septiembre 2021 
+\par\end{center}
+
+\begin{center}
+\pagebreak
+\par\end{center}
+
+\begin{center}
+\pagebreak
+\par\end{center}
+
+\begin{spacing}{3}
+\noindent \textbf{\Large{}Resumen}{\Large{} }{\Large\par}
+\end{spacing}
+
+\noindent El objetivo de este trabajo de Fin de Grado es la creación
+de una aplicación portable (Servicios RESTFull) que se encargue de
+cubrir las necesidades de los estudiantes que llegan de otras ciudades
+a estudiar, elegí dicha temática por el creciente interés de los estudiantes,
+en estudiar en otros centros fuera de sus ciudades natales. Así, primero
+se realiza un exhaustivo análisis de las aplicaciones actuales que
+se encargan de cubrir las necesidades de los estudiantes y observando
+que es lo que ofrecen y comparándolo con las necesidades reales de
+un grupo de personas, mediante este análisis se puede llegar a la
+conclusión que las aplicaciones si cubren ciertos aspectos del día
+a día pero no cumplen con todas las necesidades, ya que solo se centran
+en una dinámica ( estudio, planificación , herramientas) pero dejan
+de lado las demás necesidades sin lograr establecer un enlace entre
+estas. Otro punto a tener en cuenta es la diversidad de elementos
+electrónicos que usan los estudiantes, por ello, la utilización de
+una arquitectura de Servicios Web RESTful como base para una aplicación
+de negocio es idónea puesto que, una de sus ventajas asociadas es,
+precisamente, la capacidad de ser implementada en cualquier dispositivo
+con la mínima carga de implementación, ya que la mayor parte están
+en los servicios web (Back-end) y solo se debería crear el cliente
+para consumir estos(Front-end), permitiendo la integración desde una
+aplicación web, una aplicación de escritorio, etc.. Aunque principalmente
+esta aplicación esta centrada en la implementación Android, no se
+descarta una futura implementación en iOS y en la creación de una
+aplicación web. El objetivo final de este proyecto sería la creación
+de un prototipo de una aplicación que cubre una necesidad real y actual
+en el mercado, con la finalidad de subirlo a play store y hacer de
+este un negocio
+
+\begin{spacing}{3}
+\noindent \textbf{\large{}Palabras Clave }{\large\par}
+\end{spacing}
+
+\noindent Aplicación, Back-end, Front-end, Estudiantes, Android, REST,
+servicios web.
+\begin{center}
+\pagebreak
+\par\end{center}
+
+\begin{spacing}{3}
+\noindent \textbf{\Large{}Abstract }{\Large\par}
+\end{spacing}
+
+\noindent The objective of this End of Degree project is the creation
+of a portable application (RESTFull Services) that is in charge of
+covering the needs of students who come from other cities to study,
+I chose this subject due to the growing interest of students, in study
+at other centers outside their home cities. Thus, an exhaustive analysis
+of the current applications that cover the needs of the students is
+carried out first, observing what they offer and comparing it with
+the real needs of a group of people, through this analysis the conclusion
+can be reached that the applications do cover certain aspects of the
+day-to-day but do not meet all the needs, since they only focus on
+one dynamics (study, planning, tools) but leave aside the other needs
+without establishing a link between them. Another point to keep in
+mind is the diversity of electronic elements used by students, therefore,
+the use of a RESTful Web Services architecture as the basis for a
+business application is ideal since one of its associated advantages
+is, precisely, the ability to be implemented on any device with the
+minimum implementation load, since most are in web services (Back-end)
+and only the client should be created to consume these (Front-end),
+allowing integration from a web application, a desktop application,
+etc. Although mainly this application is focused on the Android implementation,
+a future implementation on iOS and the creation of a web application
+is not ruled out. The final objective of this project would be to
+create a prototype of an application that covers a real and current
+need in the market, in order to upload it to the play store and make
+it a business.
+
+\begin{spacing}{3}
+\noindent \textbf{\large{}Keywords Application}{\large\par}
+\end{spacing}
+
+\noindent Back-end, Front-end, Students, Android, REST, web services.
+\begin{center}
+\pagebreak
+\par\end{center}
+
+\tableofcontents{}
+\begin{center}
+\pagebreak
+\par\end{center}
+
+\begin{center}
+\pagebreak
+\par\end{center}
+
+\part{Introducción}
+
+Vivimos épocas cambiantes, donde ya no se pueden hacer pronosticos
+con vistas a un año, donde el moverse de un país a otro no es tan
+raro y donde se han estblecido una serie de tecnologías, las cuales
+se han integrado tanto en nuestra vida cotidiana que se nos hacen
+vitales para las rutinas. Por tanto hay que estar preparado para cada
+obstáculo que se nos presente, para ello buscamos siempre la mejor
+formación y que esta se adapte a nuestro estilo de vida.
+
+En este momento estamos pasando por otra situación excepcional, hay
+casos donde hay estudiantes que no saben si viajar o no con la situación
+del covid, ya que el estudiante se deberá exponer a estar contagiado
+y en muchos casos se encuentran mal informados dado que las normativas
+no paran de cambiar.
+
+\section{Problema}
+
+En este apartado se abordarán las diferentes problematicas q surgen
+entorno a los tres puntos que aborda la aplicación.
+
+Se puede detectar tres problemas principalmente: cotidianos, estudios,
+sociales
+
+\subsection{Cotidianos}
+
+Al mudarse otra vivienda, hayque adaptarse a un lugar desconocido,
+el cual lleva consigo una serie de responsabilidades, tales como hacerse
+la comida, hacer la compra, planificar los gastos, etc.... Esto puede
+suponer una gran carga si no se sigue un planing.
+
+En la actualidad, es más necesario que nunca el tener un planing preciso
+para evitar salidas inecesarias, evitando asi la exposición inecesaria
+al virus.
+
+\subsection{Estudios}
+
+Actualmente, las opciones formativas están creciendo de manera exponencial,
+a su vez, las nuevas generaciones, quieren experimentar más las diferentes
+culturas de los distintos países y de paso, formarse ahí por la calidad
+de estudio, el idioma, si es más fácil, si es más práctico, etc.\dots{}
+Y esto se debe en su mayor parte gracias al mundo globalizamos en
+el que vivimos, donde se pone de manifiesto, la facilidad de traspasar
+sus fronteras a la hora de querer formarse en el mismo, pero no todo
+son ventajas, también trajo una mayor competitividad con lo cual aumento
+la presión sobre las personas que están formándose, dándole un plus
+extra de dificultad a esta tarea. Al mismo tiempo estos factores repercuten
+sobre los centros formativos, los cuales deben elegir que formaciones
+ofrecer a sus clientes y defender una diferenciación con los otros
+centros, haciendo imposible que cada centro sea capaz de proporcionar
+todas las posibles carreras, optando mejor por el destacar en diferentes
+áreas. Estos factores crean otro marco, este sería el marco de los
+centros formativos, donde estos solo ofrecen una serie de grados y
+en algunos casos no ofrecen másteres, lo cual supone buscar otro centro. 
+
+No hay que olvidar la situación actual con el covid, haciendo necesario
+un sitio donde ponerse en contacto con alguien relacionado con la
+escuela formativa parar poder seguir con las clases y en caso de ayuda
+tener algún apoyo.
+
+\subsection{Sociales}
+
+Muchas veces este factor se pasa por alto, dado que en numerosas ocasiones
+se soluciona solo, pero hay una parte de los estudiantes que, por
+razones ideológicas, culturales, etc. Les cuesta más relacionarse,
+a esto hay que sumarle si hay diferencia lingüística, hay caso que
+ni en el pais destino saben inglés, siendo un problema aun mayor.
+
+Respecto al tiempo libre tampoco es facil saber cuales de los sitios
+son los mas famosos entre la juventud, cuales son los mas baratos,
+cuales son más divertidos.
+\end{document}
