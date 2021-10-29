@@ -66,7 +66,7 @@ public class Scraper {
     }
 
     public ArrayList<ArrayList<String>> obtenerTitulo(String http, ArrayList<String> etiquetasElementos, ArrayList<String> tiposElementos, ArrayList<String> separadores,
-         ArrayList<ArrayList<String>>profundidad) {
+            ArrayList<ArrayList<String>> profundidad) {
         ArrayList<ArrayList<String>> elementos = new ArrayList();
         String elementoData = "nada";
         HerramientasTrasformaciones hT = new HerramientasTrasformaciones();
@@ -77,16 +77,12 @@ public class Scraper {
             // Obtengo el HTML de la web en un objeto Document
             Document document = getHtmlDocument(http);
 
-            
-      
- 
-
             // Paseo cada una de las entradas
             for (int i = 0; i < etiquetasElementos.size(); i++) {
 
-               // Busco todas las entradas que estan dentro de: 
+                // Busco todas las entradas que estan dentro de: 
                 entradas = obtenerProfundidad(document, profundidad.get(i));
-           System.out.println("Número de entradas en la página: " + entradas.size() + "\n");
+                System.out.println("Número de entradas en la página: " + entradas.size() + "\n");
                 for (Element elem : entradas) {
                     // Con el método "text()" obtengo el contenido que hay dentro de las etiquetas HTML
                     // Con el método "toString()" obtengo todo el HTML con etiquetas incluidas
@@ -95,7 +91,7 @@ public class Scraper {
                         case "tag": {
                             System.out.println(etiquetasElementos.get(i));
                             elementoData = elem.getElementsByTag(etiquetasElementos.get(i)).text();
-
+                            System.out.println(elementoData);
                             break;
                         }
                         case "class": {
@@ -107,30 +103,28 @@ public class Scraper {
                         case "attr": {
                             System.out.println(etiquetasElementos.get(i));
                             elementoData = entradas.get(1).attr("src").toString();
-                            
+
                             break;
                         }
                     }
 
                 }
 
-ArrayList<String> aux = new ArrayList();
-System.out.println(separadores.size());
+                ArrayList<String> aux = new ArrayList();
+                System.out.println(separadores.size());
                 if (separadores.size() > 0) {
                     System.out.println(separadores.get(i).equals("<#>"));
- if (separadores.get(i).equals("<#>")) {
+                    if (separadores.get(i).equals("<#>")) {
 //                   System.out.println(elementoData.split(separadores.get(i).toString())[1]);
-                   
-                   
-    aux.add(elementoData);
-                  System.out.println("paso"+elementoData);
-                   
- }else{
-  aux = hT.ArrayToArrayList(elementoData.split(separadores.get(i)));
- }
-              
-                
-             elementos.add(aux);
+
+                        aux.add(elementoData);
+                        System.out.println("paso" + elementoData);
+
+                    } else {
+                        aux = hT.ArrayToArrayList(elementoData.split(separadores.get(i)));
+                    }
+
+                    elementos.add(aux);
                 }
 
             }
@@ -153,6 +147,7 @@ System.out.println(separadores.size());
 
             case 1: {
                 result = documento.select(profundidadDatos.get(0));
+                System.out.println(profundidadDatos.get(0));
                 break;
             }
             case 2: {
