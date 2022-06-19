@@ -10,6 +10,7 @@ import play.mvc.Http;
 import play.mvc.Result;
 import services.NotaBBDD;
 
+import services.ResultadoBBDD;
 import utils.ApplicationUtil;
 
 import java.sql.SQLException;
@@ -23,9 +24,31 @@ public class NotaController extends Controller {
         if (json == null) {
             return badRequest(ApplicationUtil.createResponse("Expecting JSON data", false));
         }
-        logger.debug("In ResultadoController.create(), input is: {}", json.toString());
+        logger.debug("In NotaController.create(), input is: {}", json.toString());
         Nota nota = NotaBBDD.getInstance().addNota(Json.fromJson(json, Nota.class),idUsuarios,idResultado);
         JsonNode jsonObject = Json.toJson(nota);
         return created(ApplicationUtil.createResponse(jsonObject, true));
     }
+    public Result delete(Http.Request request,int idUsuario,int idResultado) throws SQLException, ClassNotFoundException {
+        logger.debug("In NotaController.retrieve(), delete Nota");
+        if (!NotaBBDD.getInstance().deleteNota(idResultado)) {
+            return notFound(ApplicationUtil.createResponse("Notas for resultadoId= "+idResultado+" are empty", false));
+        }
+        return ok(ApplicationUtil.createResponse("All Notas are deleted", true));
+    }
+    public Result deleteAll(Http.Request request) throws SQLException, ClassNotFoundException {
+        logger.debug("In ResultadoController.retrieve(), delete Nota");
+        if (!NotaBBDD.getInstance().deleteNota()) {
+            return notFound(ApplicationUtil.createResponse("Notas  are empty", false));
+        }
+        return ok(ApplicationUtil.createResponse("All Notas are deleted", true));
+    }
+    public Result deleteById(Http.Request request,int idUsuario,int idResultado,int id) throws SQLException, ClassNotFoundException {
+        logger.debug("In ResultadoController.retrieve(), delete Nota with id: {}", idResultado,id);
+        if (!NotaBBDD.getInstance().deleteNota(idResultado,id)) {
+            return notFound(ApplicationUtil.createResponse("Usuario with id:"+idUsuario+" resultado with id:"+idResultado+" and Nota with id:" + id + " not found", false));
+        }
+        return ok(ApplicationUtil.createResponse("Usuario with id:"+idUsuario+"resultado with id:"+idResultado+" and Nota with id:" + id +" deleted", true));
+    }
+
 }

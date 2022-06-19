@@ -39,7 +39,7 @@ public class NotaBBDD extends ConexionBBDD{
             System.out.println("la fila es " + identificador );
             String patron = "/usuarios/"+ idUsuarios+"/resultados/"+idResultado+"/notas/";
             String url = patron+identificador;
-            createStatement.executeUpdate("UPDATE  tfg.resultado set url ='" + url + "' where id = "+ identificador + ";");
+            createStatement.executeUpdate("UPDATE  tfg.nota set url ='" + url + "' where id = "+ identificador + ";");
 
 
             con.close();
@@ -47,6 +47,100 @@ public class NotaBBDD extends ConexionBBDD{
         }
         return nota;
     }
+    public boolean deleteNota(int idResultado) throws SQLException, ClassNotFoundException {
+        boolean valor= false;
+        try {
+            if (conector() == true) {
 
+                String queryBBDD = "delete from tfg.nota where idResultado='"+idResultado+"';";
 
+                try {
+                    createStatement.executeUpdate(queryBBDD);
+                    valor = true;
+                    return valor;
+                } catch (SQLException ex) {
+                    Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                try {
+
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return valor;
+    }
+    public boolean deleteNota(int idResultado, int id) throws SQLException, ClassNotFoundException {
+        boolean valor= false;
+        try {
+            if (conector() == true) {
+
+                String queryBBDD = "delete from tfg.nota where idResultado='"+idResultado+"' and id="+id+";";
+
+                try {
+                    createStatement.executeUpdate(queryBBDD);
+                    valor = true;
+                    return valor;
+                } catch (SQLException ex) {
+                    Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                try {
+
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return valor;
+    }
+    public boolean deleteNota() throws SQLException, ClassNotFoundException {
+        boolean valor= false;
+        try {
+            if (conector() == true) {
+
+                String queryBBDD = "truncate table tfg.nota ;";
+
+                try {
+                    createStatement.executeUpdate(queryBBDD);
+                    valor = true;
+                    return valor;
+                } catch (SQLException ex) {
+                    Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                try {
+
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return valor;
+    }
 }
