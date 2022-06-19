@@ -195,8 +195,7 @@ public class ResultadoBBDD extends ConexionBBDD{
     public Resultado updateTipoResultadoByUsuario(Resultado resultado, int idUsuarios,int id ) throws SQLException, ClassNotFoundException {
         try {
             if (conector() == true) {
-                //int id = usu.getId();
-                //String url = usu.getUrl();
+
 
                 String tipo= resultado.getTipo();
 

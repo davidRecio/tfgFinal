@@ -39,7 +39,7 @@ public class ResultadoController extends Controller {
         Resultado result = ResultadoBBDD.getInstance().getResultado(idUsuarios,id);
         if (result == null) {
 
-            return notFound(ApplicationUtil.createResponse("Resultado with id:" + idUsuarios + " not found", false));
+            return notFound(ApplicationUtil.createResponse("Resultado with userId:" + idUsuarios + " not found", false));
 
         }
 

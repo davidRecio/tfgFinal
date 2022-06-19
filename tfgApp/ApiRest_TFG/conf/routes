@@ -21,7 +21,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
     #Nota
     DELETE    /notas                                        controllers.NotaController.deleteAll(request:Request)
-
+    GET       /notas                                        controllers.NotaController.getAllNotas(request:Request)
 #User
 
     #Usuario
@@ -41,6 +41,8 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
     #Nota
     DELETE     /usuarios/:idUsuarios/resultados/:idResultados/notas/:id        controllers.NotaController.deleteById(request:Request,idUsuarios:Int,idResultados:Int,id:Int)
+    GET        /usuarios/:idUsuarios/resultados/:idResultados/notas/:id        controllers.NotaController.retrieve(request:Request,idUsuarios:Int,idResultados:Int,id:Int)
 
     POST       /usuarios/:idUsuarios/resultados/:idResultados/notas             controllers.NotaController.create(request:Request,idUsuarios:Int,idResultados:Int)
     DELETE     /usuarios/:idUsuarios/resultados/:idResultados/notas             controllers.NotaController.delete(request:Request,idUsuarios:Int,idResultados:Int)
+    GET        /usuarios/:idUsuarios/resultados/:idResultados/notas             controllers.NotaController.listNotasByResultado(request:Request,idUsuarios:Int,idResultados:Int)

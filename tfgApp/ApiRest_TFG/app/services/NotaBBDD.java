@@ -1,6 +1,7 @@
 package services;
 
 import Beans.Nota;
+import Beans.Resultado;
 import Beans.Usuario;
 
 import java.sql.ResultSet;
@@ -47,6 +48,158 @@ public class NotaBBDD extends ConexionBBDD{
         }
         return nota;
     }
+    public Nota getNota(int idResultado, int id) {
+        Nota nota = new Nota();
+
+        try {
+            if(conector()==true){
+                System.out.println("Antes de guardar la query");
+                String queryBBDD = "select nota.id, nota.url,nota.idResultado, nota.asignatura,nota.puntuacion, nota.tiempoEstudio from tfg.nota where nota.id=" + id + " and nota.idResultado="+idResultado+";";
+                System.out.println("Después de la query");
+
+                try {
+                    rS = createStatement.executeQuery(queryBBDD);
+                } catch (SQLException ex) {
+                    Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (rS == null){
+                    nota= null;
+
+                }
+                else{
+
+                    try {
+                        while (rS.next()) {
+                            System.out.println("En la query");
+
+                            System.out.println("En el else");
+
+
+                            nota.setId(Integer.parseInt(rS.getString("id")));
+                            nota.setUrl(rS.getString("url"));
+                            nota.setIdResultado(rS.getString("idResultado"));
+                            nota.setAsignatura(rS.getString("asignatura"));
+                            nota.setPuntuacion(rS.getString("puntuacion"));
+                            nota.setTiempoEstudio(rS.getString("tiempoEstudio"));
+
+
+
+
+                            System.out.println("Al final del primer statement");
+                        }
+
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                        Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+
+                    con.close();
+
+                }
+
+            }
+            else{
+                nota=null;
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nota;
+    }
+    public ArrayList<Nota> getNota(int idResultado) {
+        ArrayList<Nota> notasLista = new ArrayList();
+        try {
+            if(conector()==true){
+                String queryBBDD = "select * from tfg.nota where idResultado="+idResultado+";";
+                int i=0;
+                try {
+                    rS = createStatement.executeQuery(queryBBDD);
+
+                    while (rS.next()) {
+                        Nota nota = new Nota();
+                        nota.setId(Integer.parseInt(rS.getString("id")));
+                        nota.setUrl(rS.getString("url"));
+                        nota.setIdResultado(rS.getString("idResultado"));
+                        nota.setAsignatura(rS.getString("asignatura"));
+                        nota.setPuntuacion(rS.getString("puntuacion"));
+                        nota.setTiempoEstudio(rS.getString("tiempoEstudio"));
+                        notasLista.add(nota);
+
+
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    i=0;
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+            else{
+                return notasLista;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("El tamaño de la lista es" + notasLista.size());
+        return notasLista;
+
+    }
+    public ArrayList<Nota> getNota() {
+        ArrayList<Nota> notasLista = new ArrayList();
+        try {
+            if(conector()==true){
+                String queryBBDD = "select * from tfg.nota;";
+                int i=0;
+                try {
+                    rS = createStatement.executeQuery(queryBBDD);
+
+                    while (rS.next()) {
+                        Nota nota = new Nota();
+                        nota.setId(Integer.parseInt(rS.getString("id")));
+                        nota.setUrl(rS.getString("url"));
+                        nota.setIdResultado(rS.getString("idResultado"));
+                        nota.setAsignatura(rS.getString("asignatura"));
+                        nota.setPuntuacion(rS.getString("puntuacion"));
+                        nota.setTiempoEstudio(rS.getString("tiempoEstudio"));
+                        notasLista.add(nota);
+
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    i=0;
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+            else{
+                return notasLista;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("El tamaño de la lista es" + notasLista.size());
+        return notasLista;
+
+    }
     public boolean deleteNota(int idResultado) throws SQLException, ClassNotFoundException {
         boolean valor= false;
         try {
@@ -59,23 +212,23 @@ public class NotaBBDD extends ConexionBBDD{
                     valor = true;
                     return valor;
                 } catch (SQLException ex) {
-                    Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 try {
 
                     con.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             else{
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return valor;
     }
@@ -91,23 +244,23 @@ public class NotaBBDD extends ConexionBBDD{
                     valor = true;
                     return valor;
                 } catch (SQLException ex) {
-                    Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 try {
 
                     con.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             else{
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return valor;
     }
@@ -123,23 +276,23 @@ public class NotaBBDD extends ConexionBBDD{
                     valor = true;
                     return valor;
                 } catch (SQLException ex) {
-                    Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 try {
 
                     con.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             else{
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ResultadoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return valor;
     }
