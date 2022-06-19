@@ -200,6 +200,41 @@ public class NotaBBDD extends ConexionBBDD{
         return notasLista;
 
     }
+    public Nota updateNota(Nota nota,int idResultado, int id ) throws SQLException, ClassNotFoundException {
+        try {
+            if (conector() == true) {
+
+                String asignatura = nota.getAsignatura();
+                String puntuacion= nota.getPuntuacion();
+                String tiempoEstudio = nota.getTiempoEstudio();
+
+
+
+                String queryBBDD = "update tfg.nota set asignatura='"+asignatura+"', puntuacion='"+puntuacion+"', tiempoEstudio='"+tiempoEstudio+"' where id="+id+" and idResultado='"+idResultado+"' ;";
+
+                try {
+                    createStatement.executeUpdate(queryBBDD);
+                } catch (SQLException ex) {
+                    Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                try {
+
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return getNota(idResultado,id);
+    }
     public boolean deleteNota(int idResultado) throws SQLException, ClassNotFoundException {
         boolean valor= false;
         try {

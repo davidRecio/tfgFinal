@@ -2,6 +2,7 @@ package controllers;
 
 import Beans.Nota;
 import Beans.Resultado;
+import Beans.Usuario;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import play.mvc.Result;
 import services.NotaBBDD;
 
 import services.ResultadoBBDD;
+import services.UsuarioBBDD;
 import utils.ApplicationUtil;
 
 import java.sql.SQLException;
@@ -80,6 +82,22 @@ public class NotaController extends Controller {
             return ok(ApplicationUtil.createResponse(jsonData, true));
 
         }
+    }
+    public Result update(Http.Request request, int idUsuarios, int idResultado, int id) throws SQLException, ClassNotFoundException {
+
+        JsonNode json = request.body().asJson();
+        Nota nota;
+        if (json == null) {
+            return badRequest(ApplicationUtil.createResponse("Expecting Json data", false));
+        }
+        nota = NotaBBDD.getInstance().updateNota(Json.fromJson(json, Nota.class),idResultado, id);
+        logger.debug("In NotaController.update(), usuario is: {}", nota);
+        if (nota == null) {
+            return notFound(ApplicationUtil.createResponse("Nota not found", false));
+        }
+
+        JsonNode jsonObject = Json.toJson(nota);
+        return ok(ApplicationUtil.createResponse(jsonObject, true));
     }
     public Result delete(Http.Request request,int idUsuario,int idResultado) throws SQLException, ClassNotFoundException {
         logger.debug("In NotaController.retrieve(), delete Nota");
