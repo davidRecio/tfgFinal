@@ -1,16 +1,29 @@
 package Beans;
 
-public class Nota {
-
+public class Nota extends RecursoWeb {
+    private String idResultado;
     private String asignatura;
     private String puntuacion;
 
-    private String tiempoEmpleado;
+    private String tiempoEstudio;
 
-    public Nota(String asignatura, String puntuacion, String tiempoEmpleado) {
+    public Nota() {
+        super();
+    }
+
+    public Nota(String idResultado, String asignatura, String puntuacion, String tiempoEstudio) {
+        this.idResultado = idResultado;
         this.asignatura = asignatura;
         this.puntuacion = puntuacion;
-        this.tiempoEmpleado = tiempoEmpleado;
+        this.tiempoEstudio = tiempoEstudio;
+    }
+
+    public String getIdResultado() {
+        return idResultado;
+    }
+
+    public void setIdResultado(String idResultado) {
+        this.idResultado = idResultado;
     }
 
     public String getAsignatura() {
@@ -29,11 +42,11 @@ public class Nota {
         this.puntuacion = puntuacion;
     }
 
-    public String getTiempoEmpleado() {
-        return tiempoEmpleado;
+    public String getTiempoEstudio() {
+        return tiempoEstudio;
     }
 
-    public void setTiempoEmpleado(String tiempoEmpleado) {
-        this.tiempoEmpleado = tiempoEmpleado;
+    public void setTiempoEstudio(String tiempoEstudio) {
+        this.tiempoEstudio = tiempoEstudio;
     }
 }

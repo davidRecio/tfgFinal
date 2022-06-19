@@ -53,7 +53,7 @@ public class ConexionBBDD {
                 String creacionNota = "create table if not exists nota(\n" +
                         "id int (100) auto_increment not null,\n" +
                         "url varchar (40),\n" +
-                        "idResult varchar (40) not null,\n" +
+                        "idResultado varchar (40) not null,\n" +
                         "asignatura varchar (150) not null,\n" +
                         "puntuacion varchar (10) not null,\n" +
                         "tiempoEstudio varchar (10) not null,\n" +

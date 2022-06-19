@@ -40,4 +40,4 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
     GET         /usuarios/:idUsuarios/resultados              controllers.ResultadoController.listResultadosByUsuario(request:Request,idUsuarios:Int)
 
     #Nota
-    #POST       /usuarios/:idUsuarios/resultados/:idResultados/notas  controllers.NotaController.create(request:Request,idUsuarios:Int,idResultados:Int)
+    POST       /usuarios/:idUsuarios/resultados/:idResultados/notas  controllers.NotaController.create(request:Request,idUsuarios:Int,idResultados:Int)
