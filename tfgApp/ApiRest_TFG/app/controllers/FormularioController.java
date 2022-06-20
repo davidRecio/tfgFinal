@@ -1,4 +1,8 @@
 package controllers;
 
-public class FormularioController {
+import play.mvc.Controller;
+
+public class FormularioController extends Controller {
+
+
 }

@@ -189,4 +189,38 @@ public class RecomendacionBBDD extends ConexionBBDD{
         }
         return listaRecomendaciones;
     }
+    public boolean deleteRecomendacion() throws SQLException, ClassNotFoundException {
+        boolean valor= false;
+        try {
+            if (conector() == true) {
+
+                String queryBBDD = "truncate table tfg.recomendacion ;";
+                String queryBBDD1 = "truncate table tfg.sugerencia";
+
+                try {
+                    createStatement.executeUpdate(queryBBDD);
+                    createStatement.executeUpdate(queryBBDD1);
+                    valor = true;
+                    return valor;
+                } catch (SQLException ex) {
+                    Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                try {
+
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NotaBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return valor;
+    }
 }

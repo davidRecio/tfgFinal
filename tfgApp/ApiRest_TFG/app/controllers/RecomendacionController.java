@@ -13,6 +13,7 @@ import services.NotaBBDD;
 import services.RecomendacionBBDD;
 import utils.ApplicationUtil;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RecomendacionController extends Controller {
@@ -54,6 +55,13 @@ public class RecomendacionController extends Controller {
 
         }
 
+    }
+    public Result deleteAll(Http.Request request) throws SQLException, ClassNotFoundException {
+        logger.debug("In RecomendacionController.retrieve(), delete Recomendaciones");
+        if (!RecomendacionBBDD.getInstance().deleteRecomendacion()) {
+            return notFound(ApplicationUtil.createResponse("Recomendaciones  are empty", false));
+        }
+        return ok(ApplicationUtil.createResponse("All Recomendaciones are deleted", true));
     }
 
 }

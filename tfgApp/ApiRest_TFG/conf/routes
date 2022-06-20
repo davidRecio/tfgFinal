@@ -25,6 +25,10 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
     #Recomendacion
     GET       /recomendaciones                              controllers.RecomendacionController.getAllRecomendaciones(request:Request)
+    DELETE    /recomendaciones                              controllers.RecomendacionController.deleteAll(request:Request)
+
+
+
 
 #User
 
@@ -54,3 +58,8 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
     #Recomendacion
     GET        /usuarios/:idUsuarios/resultados/:idResultados/recomendaciones            controllers.RecomendacionController.retrieve(request:Request,idUsuarios:Int,idResultados:Int)
+
+    #Formulario
+    POST       /usuarios/:idUsuarios/formularios                               controllers.RecomendacionController.retrieve(request:Request,idUsuarios:Int,idResultados:Int)
+
+
