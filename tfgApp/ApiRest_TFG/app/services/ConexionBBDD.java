@@ -59,7 +59,21 @@ public class ConexionBBDD {
                         "tiempoEstudio varchar (10) not null,\n" +
                         "primary key(id)\n" +
                         " );";
-
+                String creacionRecomendacion = "create table if not exists recomendacion(\n" +
+                        "id int (100) auto_increment not null,\n" +
+                        "url varchar (200),\n" +
+                        "idResultado varchar (40) not null,\n" +
+                        "primary key(id)\n" +
+                        " );";
+                String creacionSugerencia = "create table if not exists sugerencia(\n" +
+                        "id int (100) auto_increment not null,\n" +
+                        "url varchar (200),\n" +
+                        "idRecomendacion varchar (40) not null,\n" +
+                        "idNota varchar (40) not null,\n" +
+                        "riesgo varchar (10) not null,\n" +
+                        "tiempoSugerido varchar (10) not null,\n" +
+                        "primary key(id)\n" +
+                        " );";
 
 
                 createStatement.executeUpdate(creacion);
@@ -69,6 +83,8 @@ public class ConexionBBDD {
                 createStatement.executeUpdate(creacionUsuario);
                 createStatement.executeUpdate(creacionResultado);
                 createStatement.executeUpdate(creacionNota);
+                createStatement.executeUpdate(creacionRecomendacion);
+                createStatement.executeUpdate(creacionSugerencia);
 
 
                 valor= true;

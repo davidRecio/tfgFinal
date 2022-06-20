@@ -2,22 +2,36 @@ package Beans;
 
 public class Sugerencia {
 
-    private Nota nota;
+    private String idNota;
     private String riesgo;
     private String tiempoSugerido;
+    private  String asignatura;
 
-    public Sugerencia(Nota nota, String riesgo, String tiempoSugerido) {
-        this.nota = nota;
+
+    public Sugerencia(String idNota, String riesgo, String tiempoSugerido, String asignatura) {
+        this.idNota = idNota;
         this.riesgo = riesgo;
         this.tiempoSugerido = tiempoSugerido;
+        this.asignatura = asignatura;
     }
 
-    public Nota getNota() {
-        return nota;
+    public String getAsignatura() {
+        return asignatura;
     }
 
-    public void setNota(Nota nota) {
-        this.nota = nota;
+    public void setAsignatura(String asignatura) {
+        this.asignatura = asignatura;
+    }
+
+    public Sugerencia() {
+    }
+
+    public String getIdNota() {
+        return idNota;
+    }
+
+    public void setIdNota(String idNota) {
+        this.idNota = idNota;
     }
 
     public String getRiesgo() {
