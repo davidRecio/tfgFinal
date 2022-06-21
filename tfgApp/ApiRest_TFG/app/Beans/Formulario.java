@@ -7,7 +7,7 @@ public class Formulario extends RecursoWeb{
     private String idUsuario;
     private String tipo;
     private ArrayList<PreguntasFormulario> preguntasFormularioArray = new ArrayList<>();
-    private ArrayList<String> respuestasFormularioArray = new ArrayList<>();
+    private ArrayList<RespuestasFormulario> respuestasFormularioArray = new ArrayList<>();
 
     public Formulario() {
         super();
@@ -43,18 +43,18 @@ public class Formulario extends RecursoWeb{
         this.preguntasFormularioArray = preguntasFormularioArray;
     }
 
-    public ArrayList<String> getRespuestasFormularioArray() {
+    public ArrayList<RespuestasFormulario> getRespuestasFormularioArray() {
         return respuestasFormularioArray;
     }
 
-    public void setRespuestasFormularioArray(ArrayList<String> respuestasFormularioArray) {
+    public void setRespuestasFormularioArray(ArrayList<RespuestasFormulario> respuestasFormularioArray) {
         this.respuestasFormularioArray = respuestasFormularioArray;
     }
 
     public void annadirPreguntas(PreguntasFormulario preguntasFormulario){
         getPreguntasFormularioArray().add(preguntasFormulario);
     }
-    public void annadirRespuestas(String respuestasFormulario){
+    public void annadirRespuestas(RespuestasFormulario respuestasFormulario){
         getRespuestasFormularioArray().add(respuestasFormulario);
     }
 

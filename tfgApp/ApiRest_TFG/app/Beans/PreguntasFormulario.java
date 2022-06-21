@@ -9,6 +9,9 @@ public class PreguntasFormulario {
         this.pregunta = pregunta;
     }
 
+    public PreguntasFormulario() {
+    }
+
     public String getPregunta() {
         return pregunta;
     }

@@ -27,8 +27,9 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
     GET       /recomendaciones                              controllers.RecomendacionController.getAllRecomendaciones(request:Request)
     DELETE    /recomendaciones                              controllers.RecomendacionController.deleteAll(request:Request)
 
-
-
+    #Formulario
+    DELETE    /formularios                                  controllers.FormularioController.deleteAllRespuestas(request:Request)
+    DELETE    /usuarios/:idUsuarios/formularios             controllers.FormularioController.deleteRespuestasByUsuario(request:Request,idUsuarios:Int)
 
 #User
 
@@ -60,6 +61,8 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
     GET        /usuarios/:idUsuarios/resultados/:idResultados/recomendaciones            controllers.RecomendacionController.retrieve(request:Request,idUsuarios:Int,idResultados:Int)
 
     #Formulario
-    POST       /usuarios/:idUsuarios/formularios                               controllers.RecomendacionController.retrieve(request:Request,idUsuarios:Int,idResultados:Int)
+    POST        /usuarios/:idUsuarios/formularios                                    controllers.FormularioController.create(request:Request,idUsuarios:Int)
+
+    GET         /formularios/:id                                                     controllers.FormularioController.retrieve(request:Request,id:Int)
 
 
