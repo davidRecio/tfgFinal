@@ -20,8 +20,7 @@ import java.util.ArrayList;
 public class UsuarioController extends Controller  {
     private static final Logger logger = LoggerFactory.getLogger("controller");
     public Result create(Http.Request request) throws SQLException, ClassNotFoundException {
-        System.out.println("Información");
-        System.out.println(request.body());
+
         JsonNode json = request.body().asJson();
         if (json == null) {
             return badRequest(ApplicationUtil.createResponse("Expecting JSON data", false));
