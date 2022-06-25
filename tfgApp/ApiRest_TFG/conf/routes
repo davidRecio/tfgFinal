@@ -21,8 +21,8 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 
     #Formulario
-   # DELETE    /formularios                                  controllers.FormularioController.deleteAllRespuestas(request:Request)
-    #DELETE    /usuarios/:idUsuarios/formularios             controllers.FormularioController.deleteRespuestasByUsuario(request:Request,idUsuarios:Int)
+
+    DELETE    /usuarios/:idUsuarios/formularios             controllers.FormularioController.deleteRespuestasByUsuario(request:Request,idUsuarios:Int)
 
 #User
 
@@ -44,7 +44,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
     #Formulario
     PUT        /usuarios/:idUsuarios/formularios/:tipo                                    controllers.FormularioController.insertRespuestas(request:Request,idUsuarios:Int,tipo:String)
+    GET        /usuarios/:idUsuarios/formularios/:tipo                                    controllers.FormularioController.retrieve(request:Request,idUsuarios:Int,tipo:String)
 
-    #GET         /formularios/:id                                                     controllers.FormularioController.retrieve(request:Request,id:Int)
 
 

@@ -7,6 +7,7 @@ public class PreguntasFormulario {
 
     private String tipo;
 
+
     public PreguntasFormulario(String contenido, String imagen, String tipo) {
         this.contenido = contenido;
         this.imagen = imagen;
@@ -16,13 +17,7 @@ public class PreguntasFormulario {
     public PreguntasFormulario() {
     }
 
-    public String getPregunta() {
-        return contenido;
-    }
 
-    public void setPregunta(String pregunta) {
-        this.contenido = pregunta;
-    }
 
     public String getImagen() {
         return imagen;

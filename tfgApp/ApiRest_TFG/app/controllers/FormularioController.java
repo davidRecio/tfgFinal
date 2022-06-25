@@ -1,6 +1,7 @@
 package controllers;
 
 import Beans.Formulario;
+import Beans.Usuario;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +10,11 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import services.FormularioBBDD;
+import services.UsuarioBBDD;
 import utils.ApplicationUtil;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class FormularioController extends Controller {
     private static final Logger logger = LoggerFactory.getLogger("controller");
@@ -26,13 +29,13 @@ public class FormularioController extends Controller {
         JsonNode jsonObject = Json.toJson(formulario);
         return created(ApplicationUtil.createResponse(jsonObject, true));
     }
-    /*
-    public Result retrieve(Http.Request request,int id) {
-        logger.debug("In FormularioController.retrieve(), retrieve formulario with id: {}", id);
-        Formulario result = FormularioBBDD.getInstance().getformulario(id);
+
+    public Result retrieve(Http.Request request,int idUsuarios,String tipo) {
+        logger.debug("In FormularioController.retrieve(), retrieve Formulario with usuario with id: {}", idUsuarios);
+        Formulario result = FormularioBBDD.getInstance().getformulario(idUsuarios,tipo);
         if (result == null) {
 
-            return notFound(ApplicationUtil.createResponse("Formulario with Id:" + id + " not found", false));
+            return notFound(ApplicationUtil.createResponse("Formulario with usuario with Id:" + idUsuarios + " not found", false));
 
         }
 
@@ -44,15 +47,12 @@ public class FormularioController extends Controller {
             return ok(ApplicationUtil.createResponse(jsonObjects, true));
 
         }
+    }
 
-    }
-    public Result deleteAllRespuestas(Http.Request request) throws SQLException, ClassNotFoundException {
-        logger.debug("In FormularioController.retrieve(), delete Resultados");
-        if (!FormularioBBDD.getInstance().deleteRespuesta()) {
-            return notFound(ApplicationUtil.createResponse("Respuestas  are empty", false));
-        }
-        return ok(ApplicationUtil.createResponse("All Respuestas are deleted", true));
-    }
+
+
+
+
     public Result deleteRespuestasByUsuario(Http.Request request,int idUsuarios) throws SQLException, ClassNotFoundException {
         logger.debug("In FormularioController.retrieve(), delete Resultados");
         if (!FormularioBBDD.getInstance().deleteRespuestaByUser(idUsuarios)) {
@@ -61,5 +61,5 @@ public class FormularioController extends Controller {
         return ok(ApplicationUtil.createResponse("All Respuestas are deleted", true));
     }
 
-     */
+
 }

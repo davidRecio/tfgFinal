@@ -69,123 +69,40 @@ public class FormularioBBDD extends ConexionBBDD{
         con.close();
         return formulario;
     }
-    public int getformularioId(int idUsuarios, String tipo) {
-        int idFormulario = -1;
 
-        try {
-            if (conector() == true) {
-                String queryBBDD;
-
-                queryBBDD = "select formulario.idFormulario from tfg.formulario where formulario.idUsuario=" + idUsuarios + " and formulario.tipo='C';";
-                try {
-                    rS = createStatement.executeQuery(queryBBDD);
-
-                    while (rS.next()) {
-
-
-                        idFormulario= Integer.parseInt(rS.getString("idFormulario"));
-
-
-
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-
-        } catch (SQLException e) {
-
-        } catch (ClassNotFoundException e) {
-
-        }
-        return idFormulario;
-    }
-/*
-    public Formulario getformulario(int id) {
+    public Formulario getformulario(int idUsuarios, String tipo) {
         Formulario formulario = new Formulario();
+        ArrayList<PreguntasFormulario> preguntasFormulariosArray = new ArrayList<>();
+        preguntasFormulariosArray= obtenerPeguntas(tipo);
+        formulario.setTipo(tipo);
+        if(preguntasFormulariosArray.isEmpty()==false){
+            formulario.setPreguntasFormularioArray(preguntasFormulariosArray);
 
-        //id=1 es Chaside id!=1 es Toulouse
-        String queryBBDD;
-        if(id==1){
-            //id=1 es Chaside
-            queryBBDD = "select pregunta.contenido, pregunta.imagen from tfg.pregunta where pregunta.imagen is null and pregunta.tipo='C';";
+            try{
+                formulario.setRespuestasFormularioArray(obtenerRespuestas(getformularioId(idUsuarios,tipo)));
+            } catch (Exception e) {
+
+            }
         }else {
-            //id!=1 es Toulouse
-             queryBBDD = "select pregunta.contenido, pregunta.imagen from tfg.pregunta where imagen is not null and pregunta.tipo='T';";
+            //ya que siempre tiene preguntas
+            formulario=null;
         }
-        try {
-            if(conector()==true){
-
-
-                try {
-                    rS = createStatement.executeQuery(queryBBDD);
-                } catch (SQLException ex) {
-                    Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                if (rS == null){
-                    formulario= null;
-
-                }
-                else{
-
-                    try {
-
-                        while (rS.next()) {
-                            PreguntasFormulario preguntasFormulario = new PreguntasFormulario();
 
 
 
-                            if(id!=1){
-                                preguntasFormulario.setPregunta(rS.getString("pregunta.contenido")+". Escriba separado por ';' la cantidad de esta figura en cada fila");
-                            }else{
-                                preguntasFormulario.setPregunta(rS.getString("pregunta.contenido"));
-                            }
-                            if(id!=1){
-                                preguntasFormulario.setImagen(rS.getString("pregunta.imagen"));
-                            }else{
-                                preguntasFormulario.setImagen("no posee imagen");
-                            }
-
-
-                            formulario.annadirPreguntas(preguntasFormulario);
-
-
-                        }
-
-
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                        Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-
-                    con.close();
-
-                }
-
-            }
-            else{
-                formulario=null;
-
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-            Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
-        }
         return formulario;
     }
+
+
+
     public boolean deleteRespuestaByUsuarioAndtipo(int idUsuario, String tipo) throws SQLException, ClassNotFoundException {
         boolean valor= false;
         ArrayList<String>idArrayFormularios=new ArrayList<>();
-        ArrayList<String>idArrayRespuestas=new ArrayList<>();
+
         try {
             if (conector() == true) {
 
-                String queryBBDD = "select id from tfg.formulario where tipo='"+tipo+"' and (idUsuario= '"+idUsuario+"' or idUsuario is null);";
+                String queryBBDD = "select idFormulario from tfg.formulario where tipo='"+tipo+"' and (idUsuario= "+idUsuario+" or idUsuario is null);";
 
 
                 try {
@@ -194,27 +111,17 @@ public class FormularioBBDD extends ConexionBBDD{
 
 
                     while (rS.next()) {
-                        idArrayFormularios.add(rS.getString("formulario.id"));
+                        idArrayFormularios.add(rS.getString("formulario.idFormulario"));
 
                     }
-                    for (String idFormulario:idArrayFormularios) {
-                        String queryBBDD1 = "select idRespuesta from tfg.formulariorespuesta where idFormulario= '"+idFormulario+"';";
-                        ResultSet  rS1 = createStatement.executeQuery(queryBBDD1);
-                        while (rS1.next()) {
-                            idArrayRespuestas.add(rS1.getString("formulariorespuesta.idRespuesta"));
 
-                        }
-                    }
                     for (String idFormulario:idArrayFormularios) {
 
-                        createStatement.executeUpdate("delete from tfg.formulariorespuesta where idFormulario= '"+idFormulario+"';");
-                        createStatement.executeUpdate("delete from tfg.formulario where id= '"+idFormulario+"';");
+                        createStatement.executeUpdate("delete from tfg.respuesta where idFormulario= "+idFormulario+";");
+                        createStatement.executeUpdate("delete from tfg.formulario where id= "+idFormulario+";");
                     }
 
-                    for (String idRespuesta:idArrayRespuestas) {
 
-                        createStatement.executeUpdate("delete from tfg.respuesta where respuesta.id= "+idRespuesta+";");
-                    }
 
 
 
@@ -244,40 +151,163 @@ public class FormularioBBDD extends ConexionBBDD{
         return valor;
     }
     
-    public boolean deleteRespuesta() throws SQLException, ClassNotFoundException {
-        boolean valor= false;
+
+
+    private ArrayList<PreguntasFormulario> obtenerPeguntas(String tipo){
+        ArrayList<PreguntasFormulario> preguntasFormulariosArray = new ArrayList<>();
+        String queryBBDD;
+
+
+        queryBBDD = "select pregunta.contenido, pregunta.imagen from tfg.pregunta where pregunta.tipo='"+tipo+"';";
+
         try {
-            if (conector() == true) {
+            if(conector()==true){
 
-                String queryBBDD = "truncate table tfg.respuesta;";
-                String queryBBDD1 = "truncate table tfg.formulariorespuesta;";
 
                 try {
-                    createStatement.executeUpdate(queryBBDD);
-                    createStatement.executeUpdate(queryBBDD1);
-                    valor = true;
-                    return valor;
+                    rS = createStatement.executeQuery(queryBBDD);
                 } catch (SQLException ex) {
                     Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                try {
 
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+
+                    try {
+
+                        while (rS.next()) {
+                            PreguntasFormulario preguntasFormulario = new PreguntasFormulario();
+
+
+
+                            if(tipo.equals("T")){
+                                preguntasFormulario.setContenido(rS.getString("pregunta.contenido")+". Escriba separado por ';' la cantidad de esta figura en cada fila");
+                            }else{
+                                preguntasFormulario.setContenido(rS.getString("pregunta.contenido"));
+                            }
+                            if(tipo.equals("T")){
+                                preguntasFormulario.setImagen(rS.getString("pregunta.imagen"));
+                            }else{
+                                preguntasFormulario.setImagen("no posee imagen");
+                            }
+                            preguntasFormulario.setTipo(tipo);
+
+                            preguntasFormulariosArray.add(preguntasFormulario);
+
+
+                        }
+
+
+
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                        Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+
+
+
                 }
-            }
-            else{
 
-            }
+
         } catch (SQLException ex) {
+            ex.printStackTrace();
             Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
             Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return valor;
+        return preguntasFormulariosArray;
+    }
+    private ArrayList<RespuestasFormulario> obtenerRespuestas(int idFormulario){
+        ArrayList<RespuestasFormulario> respuestasFormularioArrayList = new ArrayList<>();
+        String queryBBDD;
+
+
+        queryBBDD = "select respuesta.idPregunta, respuesta.idFormulario, respuesta.valor from tfg.respuesta where respuesta.idFormulario="+idFormulario+";";
+
+        try {
+            if(conector()==true){
+
+
+                try {
+                    rS = createStatement.executeQuery(queryBBDD);
+                } catch (SQLException ex) {
+                    Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+
+
+                try {
+                    int numPregunta=1; //para mostrar el numero de la pregunta
+                    while (rS.next()) {
+                        RespuestasFormulario respuestasFormulario = new RespuestasFormulario();
+
+                        respuestasFormulario.setIdPregunta(Integer.parseInt(rS.getString("respuesta.idPregunta")));
+                        respuestasFormulario.setIdFormulario(Integer.parseInt(rS.getString("respuesta.idFormulario")));
+                        respuestasFormulario.setNumeroPregunta(numPregunta);
+                        respuestasFormulario.setValor(rS.getString("respuesta.valor"));
+
+
+                        respuestasFormularioArrayList.add(respuestasFormulario);
+                        numPregunta++;
+
+                    }
+
+
+
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+
+
+
+            }
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respuestasFormularioArrayList;
+    }
+    private int getformularioId(int idUsuarios, String tipo) {
+        int idFormulario = -1;
+
+        try {
+            if (conector() == true) {
+                String queryBBDD;
+
+                queryBBDD = "select formulario.idFormulario from tfg.formulario where formulario.idUsuario=" + idUsuarios + " and formulario.tipo='"+tipo+"';";
+                try {
+                    rS = createStatement.executeQuery(queryBBDD);
+
+                    while (rS.next()) {
+
+
+                        idFormulario= Integer.parseInt(rS.getString("idFormulario"));
+
+
+
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+
+        } catch (SQLException e) {
+
+        } catch (ClassNotFoundException e) {
+
+        }
+        return idFormulario;
     }
 
- */
 }

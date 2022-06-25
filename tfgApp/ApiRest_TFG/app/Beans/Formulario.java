@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Formulario extends RecursoWeb{
 
-    private String idUsuario;
+    private int idUsuario;
     private String tipo;
     private ArrayList<PreguntasFormulario> preguntasFormularioArray = new ArrayList<>();
     private ArrayList<RespuestasFormulario> respuestasFormularioArray = new ArrayList<>();
@@ -13,17 +13,17 @@ public class Formulario extends RecursoWeb{
         super();
     }
 
-    public Formulario(String idUsuario, String tipo) {
+    public Formulario(int idUsuario) {
         this.idUsuario = idUsuario;
-        this.tipo = tipo;
+
 
     }
 
-    public String getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
+    public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
