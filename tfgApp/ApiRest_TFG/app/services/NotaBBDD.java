@@ -1,8 +1,6 @@
 package services;
 
 import Beans.Nota;
-import Beans.Resultado;
-import Beans.Usuario;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

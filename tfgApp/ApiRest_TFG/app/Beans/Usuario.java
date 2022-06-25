@@ -7,9 +7,19 @@ public class Usuario extends RecursoWeb{
 
     private String nombre;
     private String pass;
+    private String url;
 
+    @Override
+    public String getUrl() {
+        return url;
+    }
 
-   public Usuario(){
+    @Override
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Usuario(){
         super();
     }
    public Usuario(int id, String url, String nombre, String pass){

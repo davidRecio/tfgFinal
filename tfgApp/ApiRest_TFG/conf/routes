@@ -15,17 +15,11 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
     DELETE   /usuarios               controllers.UsuarioController.delete(request:Request)
     GET      /usuarios               controllers.UsuarioController.listUsuarios(request:Request)
 
-    #Resultado
-    DELETE    /resultados                                   controllers.ResultadoController.deleteAll(request:Request)
-    GET       /resultados                                   controllers.ResultadoController.getAllResultados(request:Request)
 
     #Nota
     DELETE    /notas                                        controllers.NotaController.deleteAll(request:Request)
     GET       /notas                                        controllers.NotaController.getAllNotas(request:Request)
 
-    #Recomendacion
-    GET       /recomendaciones                              controllers.RecomendacionController.getAllRecomendaciones(request:Request)
-    DELETE    /recomendaciones                              controllers.RecomendacionController.deleteAll(request:Request)
 
     #Formulario
     DELETE    /formularios                                  controllers.FormularioController.deleteAllRespuestas(request:Request)
@@ -39,14 +33,6 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
     PUT         /usuarios/:id          controllers.UsuarioController.update(request:Request,id:Int)
     PATCH       /usuarios/:id          controllers.UsuarioController.updatePass(request:Request,id:Int)
 
-    #Resultado
-    DELETE      /usuarios/:idUsuarios/resultados/:id         controllers.ResultadoController.deleteById(request:Request,idUsuarios:Int,id:Int)
-    GET         /usuarios/:idUsuarios/resultados/:id         controllers.ResultadoController.retrieve(request:Request,idUsuarios:Int,id:Int)
-    PATCH       /usuarios/:idUsuarios/resultados/:id         controllers.ResultadoController.updateTipo(request:Request,idUsuarios:Int,id:Int)
-
-    POST        /usuarios/:idUsuarios/resultados              controllers.ResultadoController.create(request:Request,idUsuarios:Int)
-    DELETE      /usuarios/:idUsuarios/resultados              controllers.ResultadoController.delete(request:Request,idUsuarios:Int)
-    GET         /usuarios/:idUsuarios/resultados              controllers.ResultadoController.listResultadosByUsuario(request:Request,idUsuarios:Int)
 
     #Nota
     DELETE     /usuarios/:idUsuarios/resultados/:idResultados/notas/:id        controllers.NotaController.deleteById(request:Request,idUsuarios:Int,idResultados:Int,id:Int)
@@ -56,9 +42,6 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
     POST       /usuarios/:idUsuarios/resultados/:idResultados/notas             controllers.NotaController.create(request:Request,idUsuarios:Int,idResultados:Int)
     DELETE     /usuarios/:idUsuarios/resultados/:idResultados/notas             controllers.NotaController.delete(request:Request,idUsuarios:Int,idResultados:Int)
     GET        /usuarios/:idUsuarios/resultados/:idResultados/notas             controllers.NotaController.listNotasByResultado(request:Request,idUsuarios:Int,idResultados:Int)
-
-    #Recomendacion
-    GET        /usuarios/:idUsuarios/resultados/:idResultados/recomendaciones            controllers.RecomendacionController.retrieve(request:Request,idUsuarios:Int,idResultados:Int)
 
     #Formulario
     POST        /usuarios/:idUsuarios/formularios                                    controllers.FormularioController.create(request:Request,idUsuarios:Int)

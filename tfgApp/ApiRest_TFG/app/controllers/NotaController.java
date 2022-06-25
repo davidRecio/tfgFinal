@@ -1,8 +1,6 @@
 package controllers;
 
 import Beans.Nota;
-import Beans.Resultado;
-import Beans.Usuario;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +10,6 @@ import play.mvc.Http;
 import play.mvc.Result;
 import services.NotaBBDD;
 
-import services.ResultadoBBDD;
-import services.UsuarioBBDD;
 import utils.ApplicationUtil;
 
 import java.sql.SQLException;

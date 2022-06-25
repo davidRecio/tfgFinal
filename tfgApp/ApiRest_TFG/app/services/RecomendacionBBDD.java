@@ -1,13 +1,7 @@
 package services;
 
-import Beans.Nota;
-import Beans.Recomendacion;
-import Beans.Sugerencia;
-
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

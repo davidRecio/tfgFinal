@@ -1,7 +1,6 @@
 package controllers;
 
 import Beans.Formulario;
-import Beans.Resultado;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +9,6 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import services.FormularioBBDD;
-import services.ResultadoBBDD;
 import utils.ApplicationUtil;
 
 import java.sql.SQLException;

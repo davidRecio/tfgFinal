@@ -1,29 +1,34 @@
 package Beans;
 
 public class Nota extends RecursoWeb {
-    private String idResultado;
+    private int idUsuario;
     private String asignatura;
-    private String puntuacion;
-
     private String tiempoEstudio;
+    private String tiempoRecomendado;
+    private String puntuacion;
+    private String riesgo;
+    private String tipo;
 
     public Nota() {
         super();
     }
 
-    public Nota(String idResultado, String asignatura, String puntuacion, String tiempoEstudio) {
-        this.idResultado = idResultado;
+    public Nota(int idUsuario, String asignatura, String tiempoEstudio, String tiempoRecomendado, String puntuacion, String riesgo, String tipo) {
+        this.idUsuario = idUsuario;
         this.asignatura = asignatura;
-        this.puntuacion = puntuacion;
         this.tiempoEstudio = tiempoEstudio;
+        this.tiempoRecomendado = tiempoRecomendado;
+        this.puntuacion = puntuacion;
+        this.riesgo = riesgo;
+        this.tipo = tipo;
     }
 
-    public String getIdResultado() {
-        return idResultado;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdResultado(String idResultado) {
-        this.idResultado = idResultado;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getAsignatura() {
@@ -34,6 +39,22 @@ public class Nota extends RecursoWeb {
         this.asignatura = asignatura;
     }
 
+    public String getTiempoEstudio() {
+        return tiempoEstudio;
+    }
+
+    public void setTiempoEstudio(String tiempoEstudio) {
+        this.tiempoEstudio = tiempoEstudio;
+    }
+
+    public String getTiempoRecomendado() {
+        return tiempoRecomendado;
+    }
+
+    public void setTiempoRecomendado(String tiempoRecomendado) {
+        this.tiempoRecomendado = tiempoRecomendado;
+    }
+
     public String getPuntuacion() {
         return puntuacion;
     }
@@ -42,11 +63,19 @@ public class Nota extends RecursoWeb {
         this.puntuacion = puntuacion;
     }
 
-    public String getTiempoEstudio() {
-        return tiempoEstudio;
+    public String getRiesgo() {
+        return riesgo;
     }
 
-    public void setTiempoEstudio(String tiempoEstudio) {
-        this.tiempoEstudio = tiempoEstudio;
+    public void setRiesgo(String riesgo) {
+        this.riesgo = riesgo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

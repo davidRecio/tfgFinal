@@ -40,7 +40,7 @@ public class UsuarioBBDD extends ConexionBBDD{
             String url = patron+identificador;
             createStatement.executeUpdate("UPDATE  tfg.usuario set url ='" + url + "' where id = "+ identificador + ";");
 
-
+            usu.setUrl(url);
             con.close();
 
         }

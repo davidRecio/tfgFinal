@@ -72,10 +72,10 @@ public class FormularioBBDD extends ConexionBBDD{
         String queryBBDD;
         if(id==1){
             //id=1 es Chaside
-            queryBBDD = "select pregunta.contenido, pregunta.imagen from tfg.pregunta where imagen is null;";
+            queryBBDD = "select pregunta.contenido, pregunta.imagen from tfg.pregunta where pregunta.imagen is null and pregunta.tipo='C';";
         }else {
             //id!=1 es Toulouse
-             queryBBDD = "select pregunta.contenido, pregunta.imagen from tfg.pregunta where imagen is not null;";
+             queryBBDD = "select pregunta.contenido, pregunta.imagen from tfg.pregunta where imagen is not null and pregunta.tipo='T';";
         }
         try {
             if(conector()==true){
