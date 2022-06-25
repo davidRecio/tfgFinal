@@ -43,7 +43,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
     GET        /usuarios/:idUsuarios/notas             controllers.NotaController.listNotasByResultado(request:Request,idUsuarios:Int)
 
     #Formulario
-    #POST        /usuarios/:idUsuarios/formularios                                    controllers.FormularioController.create(request:Request,idUsuarios:Int)
+    PUT        /usuarios/:idUsuarios/formularios/:tipo                                    controllers.FormularioController.insertRespuestas(request:Request,idUsuarios:Int,tipo:String)
 
     #GET         /formularios/:id                                                     controllers.FormularioController.retrieve(request:Request,id:Int)
 

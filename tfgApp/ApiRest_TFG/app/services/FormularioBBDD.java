@@ -18,40 +18,46 @@ public class FormularioBBDD extends ConexionBBDD{
         }
         return instance;
     }
-    public Formulario addFormulario(Formulario formulario,int idUsuario) throws SQLException, ClassNotFoundException {
+    public Formulario addRespuestas(Formulario formulario,int idUsuario, String tipo) throws SQLException, ClassNotFoundException {
+        Formulario formulario1 = new Formulario();
         int identificador= -1;
         ArrayList<RespuestasFormulario> listaidRespuestas;
-
+        listaidRespuestas=formulario.getRespuestasFormularioArray();
         try{
 
         if (conector() == true) {
-            
-
-            String tipo= formulario.getTipo();
-            listaidRespuestas=formulario.getRespuestasFormularioArray();
-            
-         
-            deleteRespuestaByUsuarioAndtipo(idUsuario,tipo);
-            
-            createStatement.executeUpdate("INSERT INTO tfg.formulario (idUsuario,tipo) VALUES ('" + idUsuario + "', '" + tipo + "');" , Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs = createStatement.getGeneratedKeys();
-            rs.next();
-            identificador=rs.getInt(1);
-
-            System.out.println("la fila es " + identificador );
-            String patron = "/usuarios/formularios/";
-            String url = patron+identificador;
-            createStatement.executeUpdate("UPDATE  tfg.formulario set url ='" + url + "' where id = "+ identificador + ";");
 
 
-            for (RespuestasFormulario respuesta:listaidRespuestas) {
+            int idFormulario= getformularioId(idUsuario,tipo);
 
-                createStatement.executeUpdate("INSERT INTO tfg.respuesta (idPregunta,valor) VALUES ('" + respuesta.getIdPregunta() + "', '" + respuesta.getValor() + "');" , Statement.RETURN_GENERATED_KEYS);
-                ResultSet rs2 = createStatement.getGeneratedKeys();
-                rs2.next();
-                createStatement.executeUpdate("INSERT INTO tfg.formulariorespuesta (idFormulario,idRespuesta) VALUES ('" + idUsuario + "', '" + rs2.getInt(1) + "');" );
+            //comprueba que esixte
+            if(idFormulario!=-1) {
+
+
+                //comprobar si estan todas las respuestas
+                //CHASIDE
+                if (tipo.equals("C") && listaidRespuestas.size() == 97) {
+
+                    for (RespuestasFormulario respuesta : listaidRespuestas) {
+
+                        createStatement.executeUpdate("INSERT INTO tfg.respuesta (idPregunta, idFormulario, valor) VALUES (" + respuesta.getIdPregunta() + ", " + idFormulario + ", '" + respuesta.getValor() + "');");
+
+
+                    }
+                } //TOULOUSE
+                else if (tipo.equals("T") && listaidRespuestas.size() < 6) {
+                    for (RespuestasFormulario respuesta : listaidRespuestas) {
+
+                        createStatement.executeUpdate("INSERT INTO tfg.respuesta (idPregunta,valor) VALUES ('" + respuesta.getIdPregunta() + "', '" + respuesta.getValor() + "');");
+
+
+                    }
+                }else {
+                    formulario1=null;
+                }
 
             }
+
 
 
         }
@@ -63,8 +69,39 @@ public class FormularioBBDD extends ConexionBBDD{
         con.close();
         return formulario;
     }
+    public int getformularioId(int idUsuarios, String tipo) {
+        int idFormulario = -1;
+
+        try {
+            if (conector() == true) {
+                String queryBBDD;
+
+                queryBBDD = "select formulario.idFormulario from tfg.formulario where formulario.idUsuario=" + idUsuarios + " and formulario.tipo='C';";
+                try {
+                    rS = createStatement.executeQuery(queryBBDD);
+
+                    while (rS.next()) {
 
 
+                        idFormulario= Integer.parseInt(rS.getString("idFormulario"));
+
+
+
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(FormularioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+
+        } catch (SQLException e) {
+
+        } catch (ClassNotFoundException e) {
+
+        }
+        return idFormulario;
+    }
+/*
     public Formulario getformulario(int id) {
         Formulario formulario = new Formulario();
 
@@ -241,4 +278,6 @@ public class FormularioBBDD extends ConexionBBDD{
         }
         return valor;
     }
+
+ */
 }

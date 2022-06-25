@@ -41,6 +41,9 @@ public class UsuarioBBDD extends ConexionBBDD{
             createStatement.executeUpdate("UPDATE  tfg.usuario set url ='" + url + "' where idUsuario = "+ identificador + ";");
 
             usu.setUrl(url);
+
+           crearFormularios(identificador);
+
             con.close();
 
         }
@@ -257,4 +260,41 @@ public class UsuarioBBDD extends ConexionBBDD{
         }
         return valor;
     }
+
+    private boolean crearFormularios(int idUsuario){
+        boolean valor= true;
+        //le crea los formularios
+        try {
+            //CHASIDE
+            createStatement.executeUpdate("INSERT INTO tfg.formulario (idUsuario,tipo) VALUES ('" + idUsuario + "', 'C');" , Statement.RETURN_GENERATED_KEYS);
+
+        ResultSet rs = createStatement.getGeneratedKeys();
+        rs.next();
+        idUsuario=rs.getInt(1);
+
+        System.out.println("la fila es " + idUsuario );
+        String patron = "/usuarios/formularios/";
+        String url = patron+"C";
+        createStatement.executeUpdate("UPDATE  tfg.formulario set url ='" + url + "' where idFormulario = "+ idUsuario + ";");
+
+        //TOULOUSE
+            createStatement.executeUpdate("INSERT INTO tfg.formulario (idUsuario,tipo) VALUES ('" + idUsuario + "', 'T');" , Statement.RETURN_GENERATED_KEYS);
+
+             rs = createStatement.getGeneratedKeys();
+            rs.next();
+            idUsuario=rs.getInt(1);
+
+            System.out.println("la fila es " + idUsuario );
+             patron = "/usuarios/formularios/";
+             url = patron+"T";
+            createStatement.executeUpdate("UPDATE  tfg.formulario set url ='" + url + "' where idFormulario = "+ idUsuario + ";");
+        } catch (SQLException e) {
+            valor= false;
+
+
+        }
+        return valor;
+
+    }
+
 }

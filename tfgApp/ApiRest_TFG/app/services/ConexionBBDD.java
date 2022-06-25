@@ -77,7 +77,7 @@ public class ConexionBBDD {
                         "  PRIMARY KEY (`idPregunta`)\n" +
                         ");";
                 String creacionRespuesta = "CREATE TABLE if not exists `respuesta` (\n" +
-                        "  `idRespuesta` int(11) NOT NULL,\n" +
+                        "  `idRespuesta` int(11) NOT NULL AUTO_INCREMENT,\n" +
                         "  `idPregunta` int(11) NOT NULL,\n" +
                         "  `idFormulario` int(11) NOT NULL,\n" +
                         "  `valor` varchar(3) NOT NULL,\n" +

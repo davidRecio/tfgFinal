@@ -15,17 +15,18 @@ import java.sql.SQLException;
 
 public class FormularioController extends Controller {
     private static final Logger logger = LoggerFactory.getLogger("controller");
-    public Result create(Http.Request request,int idUsuarios) throws SQLException, ClassNotFoundException {
+    public Result insertRespuestas(Http.Request request,int idUsuarios,String tipo) throws SQLException, ClassNotFoundException {
 
         JsonNode json = request.body().asJson();
         if (json == null) {
             return badRequest(ApplicationUtil.createResponse("Expecting JSON data", false));
         }
         logger.debug("In FormularioController.create(), input is: {}", json.toString());
-        Formulario formulario = FormularioBBDD.getInstance().addFormulario(Json.fromJson(json, Formulario.class),idUsuarios);
+        Formulario formulario = FormularioBBDD.getInstance().addRespuestas(Json.fromJson(json, Formulario.class),idUsuarios,tipo);
         JsonNode jsonObject = Json.toJson(formulario);
         return created(ApplicationUtil.createResponse(jsonObject, true));
     }
+    /*
     public Result retrieve(Http.Request request,int id) {
         logger.debug("In FormularioController.retrieve(), retrieve formulario with id: {}", id);
         Formulario result = FormularioBBDD.getInstance().getformulario(id);
@@ -59,4 +60,6 @@ public class FormularioController extends Controller {
         }
         return ok(ApplicationUtil.createResponse("All Respuestas are deleted", true));
     }
+
+     */
 }
