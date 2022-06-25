@@ -68,7 +68,7 @@ public class UsuarioController extends Controller  {
 
         }
     }
-
+/*
     public Result update(Http.Request request, int id) throws SQLException, ClassNotFoundException {
         logger.debug("In UsuarioController.update()");
         System.out.println("Información");
@@ -87,6 +87,8 @@ public class UsuarioController extends Controller  {
         JsonNode jsonObject = Json.toJson(usu);
         return ok(ApplicationUtil.createResponse(jsonObject, true));
     }
+
+ */
     public Result updatePass(Http.Request request, int id) throws SQLException, ClassNotFoundException {
         logger.debug("In UsuarioController.update()");
         JsonNode json = request.body().asJson();

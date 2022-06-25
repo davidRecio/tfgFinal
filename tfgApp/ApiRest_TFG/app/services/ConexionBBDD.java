@@ -35,7 +35,7 @@ public class ConexionBBDD {
                 String uso = "use tfg;";
                 String creacionUsuario = "CREATE TABLE if not exists `usuario` (\n" +
                         "  `idUsuario` int(100) NOT NULL AUTO_INCREMENT,\n" +
-                        "  `url` varchar(40) DEFAULT NULL,\n" +
+                        "  `url` varchar(200) DEFAULT NULL,\n" +
                         "  `nombre` varchar(40) NOT NULL,\n" +
                         "  `pass` varchar(20) NOT NULL,\n" +
                         "  `aptitudes` varchar(200) DEFAULT NULL,\n" +
@@ -46,7 +46,7 @@ public class ConexionBBDD {
 
                 String creacionFormulario = "CREATE TABLE if not exists `formulario` (\n" +
                         "  `idFormulario` int(11) NOT NULL AUTO_INCREMENT,\n" +
-                        "  `url` varchar(200) NOT NULL,\n" +
+                        "  `url` varchar(200) DEFAULT NULL,\n" +
                         "  `idUsuario` int(11) NOT NULL,\n" +
                         "  `tipo` varchar(1) CHARACTER SET utf8 NOT NULL,\n" +
                         "  PRIMARY KEY (`idformulario`),\n" +
@@ -55,8 +55,8 @@ public class ConexionBBDD {
                         ");";
 
                 String creacionNota = "CREATE TABLE if not exists `nota` (\n" +
-                        "  `idNota` int(11) NOT NULL,\n" +
-                        "  `url` varchar(300) CHARACTER SET utf8 NOT NULL,\n" +
+                        "  `idNota` int(11) NOT NULL AUTO_INCREMENT,\n" +
+                        "  `url` varchar(300) DEFAULT NULL,\n" +
                         "  `idUsuario` int(11) NOT NULL,\n" +
                         "  `asignatura` varchar(300) CHARACTER SET utf8 NOT NULL,\n" +
                         "  `tiempoEstudio` int(11) NOT NULL,\n" +

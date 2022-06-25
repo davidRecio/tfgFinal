@@ -16,35 +16,35 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 
     #Nota
-    #DELETE    /notas                                        controllers.NotaController.deleteAll(request:Request)
-    #GET       /notas                                        controllers.NotaController.getAllNotas(request:Request)
+     DELETE    /notas                                        controllers.NotaController.deleteAll(request:Request)
+     GET       /notas                                        controllers.NotaController.getAllNotas(request:Request)
 
 
     #Formulario
-    DELETE    /formularios                                  controllers.FormularioController.deleteAllRespuestas(request:Request)
-    DELETE    /usuarios/:idUsuarios/formularios             controllers.FormularioController.deleteRespuestasByUsuario(request:Request,idUsuarios:Int)
+   # DELETE    /formularios                                  controllers.FormularioController.deleteAllRespuestas(request:Request)
+    #DELETE    /usuarios/:idUsuarios/formularios             controllers.FormularioController.deleteRespuestasByUsuario(request:Request,idUsuarios:Int)
 
 #User
 
     #Usuario
     GET         /usuarios/:id          controllers.UsuarioController.retrieve(request:Request,id:Int)
     DELETE      /usuarios/:id          controllers.UsuarioController.delete(request:Request,id:Int)
-    PUT         /usuarios/:id          controllers.UsuarioController.update(request:Request,id:Int)
+    #PUT         /usuarios/:id          controllers.UsuarioController.update(request:Request,id:Int)
     PATCH       /usuarios/:id          controllers.UsuarioController.updatePass(request:Request,id:Int)
 
 
     #Nota
-    #DELETE     /usuarios/:idUsuarios/resultados/:idResultados/notas/:id        controllers.NotaController.deleteById(request:Request,idUsuarios:Int,idResultados:Int,id:Int)
-   # GET        /usuarios/:idUsuarios/resultados/:idResultados/notas/:id        controllers.NotaController.retrieve(request:Request,idUsuarios:Int,idResultados:Int,id:Int)
-   # PUT        /usuarios/:idUsuarios/resultados/:idResultados/notas/:id        controllers.NotaController.update(request:Request,idUsuarios:Int,idResultados:Int,id:Int)
+    DELETE     /usuarios/:idUsuarios/notas/:id        controllers.NotaController.deleteById(request:Request,idUsuarios:Int,id:Int)
+    GET        /usuarios/:idUsuarios/notas/:id        controllers.NotaController.retrieve(request:Request,idUsuarios:Int,id:Int)
+    PUT        /usuarios/:idUsuarios/notas/:id        controllers.NotaController.update(request:Request,idUsuarios:Int,id:Int)
 
-  #  POST       /usuarios/:idUsuarios/resultados/:idResultados/notas             controllers.NotaController.create(request:Request,idUsuarios:Int,idResultados:Int)
-  #  DELETE     /usuarios/:idUsuarios/resultados/:idResultados/notas             controllers.NotaController.delete(request:Request,idUsuarios:Int,idResultados:Int)
-  #  GET        /usuarios/:idUsuarios/resultados/:idResultados/notas             controllers.NotaController.listNotasByResultado(request:Request,idUsuarios:Int,idResultados:Int)
+    POST       /usuarios/:idUsuarios/notas             controllers.NotaController.create(request:Request,idUsuarios:Int)
+    DELETE     /usuarios/:idUsuarios/notas             controllers.NotaController.delete(request:Request,idUsuarios:Int)
+    GET        /usuarios/:idUsuarios/notas             controllers.NotaController.listNotasByResultado(request:Request,idUsuarios:Int)
 
     #Formulario
-    POST        /usuarios/:idUsuarios/formularios                                    controllers.FormularioController.create(request:Request,idUsuarios:Int)
+    #POST        /usuarios/:idUsuarios/formularios                                    controllers.FormularioController.create(request:Request,idUsuarios:Int)
 
-    GET         /formularios/:id                                                     controllers.FormularioController.retrieve(request:Request,id:Int)
+    #GET         /formularios/:id                                                     controllers.FormularioController.retrieve(request:Request,id:Int)
 
 
