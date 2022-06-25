@@ -21,33 +21,25 @@ public class UsuarioBBDD extends ConexionBBDD{
         return instance;
     }
 
-    public Usuario addUsuario(Usuario usu) throws SQLException, ClassNotFoundException {
+    public Usuario addUsuario(Usuario usuario) throws SQLException, ClassNotFoundException {
         int identificador= -1;
-
         if (conector() == true) {
 
-
-            String nombre= usu.getNombre();
-            String pass= usu.getPass();
-
-
+            String nombre= usuario.getNombre();
+            String pass= usuario.getPass();
             createStatement.executeUpdate("INSERT INTO tfg.usuario (nombre,pass) VALUES ('" + nombre + "', '" + pass + "');" , Statement.RETURN_GENERATED_KEYS);
-            ResultSet prueba = createStatement.getGeneratedKeys();
-            prueba.next();
-            identificador=prueba.getInt(1);
-            System.out.println("la fila es " + identificador );
+            ResultSet rS = createStatement.getGeneratedKeys();
+            rS.next();
+            identificador=rS.getInt(1);
             String patron = "/usuarios/";
             String url = patron+identificador;
             createStatement.executeUpdate("UPDATE  tfg.usuario set url ='" + url + "' where idUsuario = "+ identificador + ";");
-
-            usu.setUrl(url);
-
-           crearFormularios(identificador);
-
+            usuario.setUrl(url);
+            crearFormularios(identificador);
             con.close();
 
         }
-        return usu;
+        return usuario;
     }
 
 
