@@ -38,7 +38,7 @@ public class UsuarioBBDD extends ConexionBBDD{
             System.out.println("la fila es " + identificador );
             String patron = "/usuarios/";
             String url = patron+identificador;
-            createStatement.executeUpdate("UPDATE  tfg.usuario set url ='" + url + "' where id = "+ identificador + ";");
+            createStatement.executeUpdate("UPDATE  tfg.usuario set url ='" + url + "' where idUsuario = "+ identificador + ";");
 
             usu.setUrl(url);
             con.close();
@@ -54,7 +54,7 @@ public class UsuarioBBDD extends ConexionBBDD{
         try {
             if(conector()==true){
                 System.out.println("Antes de guardar la query");
-                String queryBBDD = "select usuario.id, usuario.url,usuario.nombre, usuario.pass from tfg.usuario where usuario.id=" + id + ";";
+                String queryBBDD = "select usuario.idUsuario, usuario.url,usuario.nombre, usuario.pass from tfg.usuario where usuario.idUsuario=" + id + ";";
                 System.out.println("Después de la query");
 
                 try {
@@ -74,14 +74,13 @@ public class UsuarioBBDD extends ConexionBBDD{
 
                                 System.out.println("En el else");
 
-                                usu.setId(rS.getInt("usuario.id"));
-
-                                usu.setUrl(rS.getString("usuario.url"));
-
-                                usu.setNombre(rS.getString("usuario.nombre"));
-
-                                usu.setPass(rS.getString("usuario.pass"));
-
+                                 usu.setId(rS.getInt("usuario.idUsuario"));
+                                 usu.setUrl(rS.getString("usuario.url"));
+                                 usu.setNombre(rS.getString("usuario.nombre"));
+                                 usu.setPass(rS.getString("usuario.pass"));
+                                 usu.setAptitudes(rS.getString("aptitudes"));
+                                 usu.setIntereses(rS.getString("intereses"));
+                                 usu.setNivelConcentracion(rS.getString("nivelConcentracion"));
 
 
                                 System.out.println("Al final del primer statement");
@@ -123,10 +122,13 @@ public class UsuarioBBDD extends ConexionBBDD{
 
                     while (rS.next()) {
                         Usuario usu = new Usuario();
-                        usu.setId(Integer.parseInt(rS.getString("id")));
+                        usu.setId(Integer.parseInt(rS.getString("idUsuario")));
                         usu.setUrl(rS.getString("url"));
                         usu.setNombre(rS.getString("nombre"));
                         usu.setPass(rS.getString("pass"));
+                        usu.setAptitudes(rS.getString("aptitudes"));
+                        usu.setIntereses(rS.getString("intereses"));
+                        usu.setNivelConcentracion(rS.getString("nivelConcentracion"));
                         usuariosLista.add(usu);
 
                     }
@@ -160,8 +162,11 @@ public class UsuarioBBDD extends ConexionBBDD{
 
                 String nombre = usu.getNombre();
                 String pass= usu.getPass();
+                String aptitudes= usu.getAptitudes();
+                String intereses= usu.getIntereses();
+                String nivelConcentracion= usu.getNivelConcentracion();
 
-                String queryBBDD = "update tfg.usuario set nombre='"+nombre+"', pass='"+pass+"' where id="+id+";";
+                String queryBBDD = "update tfg.usuario set nombre='"+nombre+"', pass='"+pass+"', aptitudes='"+aptitudes+"', intereses='"+intereses+"', nivelConcentracion='"+nivelConcentracion+"' where idUsuario="+id+";";
 
                 try {
                     createStatement.executeUpdate(queryBBDD);
@@ -194,7 +199,7 @@ public class UsuarioBBDD extends ConexionBBDD{
 
                 String pass= usu.getPass();
 
-                String queryBBDD = "update tfg.usuario set pass='"+pass+"' where id="+id+";";
+                String queryBBDD = "update tfg.usuario set pass='"+pass+"' where idUsuario="+id+";";
 
                 try {
                     createStatement.executeUpdate(queryBBDD);
@@ -219,44 +224,13 @@ public class UsuarioBBDD extends ConexionBBDD{
         }
         return getUsuario(id);
     }
-    public boolean deleteUsuario() throws SQLException, ClassNotFoundException {
-        boolean valor= false;
-        try {
-            if (conector() == true) {
 
-                String queryBBDD = "truncate table tfg.usuario;";
-
-                try {
-                    createStatement.executeUpdate(queryBBDD);
-                    valor = true;
-                    return valor;
-                } catch (SQLException ex) {
-                    Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                try {
-
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            else{
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return valor;
-    }
     public boolean deleteUsuario(int id) throws SQLException, ClassNotFoundException {
         boolean valor= false;
         try {
             if (conector() == true) {
 
-                String queryBBDD = "delete from tfg.usuario where id="+id+";";
+                String queryBBDD = "delete from tfg.usuario where idUsuario="+id+";";
 
                 try {
                     createStatement.executeUpdate(queryBBDD);

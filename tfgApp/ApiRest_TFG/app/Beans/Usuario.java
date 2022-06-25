@@ -7,28 +7,23 @@ public class Usuario extends RecursoWeb{
 
     private String nombre;
     private String pass;
-    private String url;
+    private String aptitudes;
+    private String intereses;
+    private String nivelConcentracion;
 
-    @Override
-    public String getUrl() {
-        return url;
-    }
 
-    @Override
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public Usuario(){
         super();
     }
-   public Usuario(int id, String url, String nombre, String pass){
-        super(id,url);
-        this.nombre=nombre;
-        this.pass=pass;
 
+    public Usuario(String nombre, String pass, String aptitudes, String intereses, String nivelConcentracion) {
+        this.nombre = nombre;
+        this.pass = pass;
+        this.aptitudes = aptitudes;
+        this.intereses = intereses;
+        this.nivelConcentracion = nivelConcentracion;
     }
-
 
     public String getNombre() {
         return nombre;
@@ -46,14 +41,39 @@ public class Usuario extends RecursoWeb{
         this.pass = pass;
     }
 
+    public String getAptitudes() {
+        return aptitudes;
+    }
 
+    public void setAptitudes(String aptitudes) {
+        this.aptitudes = aptitudes;
+    }
+
+    public String getIntereses() {
+        return intereses;
+    }
+
+    public void setIntereses(String intereses) {
+        this.intereses = intereses;
+    }
+
+    public String getNivelConcentracion() {
+        return nivelConcentracion;
+    }
+
+    public void setNivelConcentracion(String nivelConcentracion) {
+        this.nivelConcentracion = nivelConcentracion;
+    }
 
     @Override
     public String toString() {
         return "Usuario{" +
                 "id del usuario=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", pass='" + pass +
+                ", nombre='" + nombre  +
+                " , pass='" + pass +
+                " , aptitudes='" + aptitudes +
+                " , intereses='" + intereses +
+                " , nivelConcentracion='" + nivelConcentracion +
                 '}';
     }
 

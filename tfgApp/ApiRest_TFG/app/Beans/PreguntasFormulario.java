@@ -2,22 +2,26 @@ package Beans;
 
 public class PreguntasFormulario {
 
-    private String pregunta;
+    private String contenido;
     private String imagen;
 
-    public PreguntasFormulario(String pregunta) {
-        this.pregunta = pregunta;
+    private String tipo;
+
+    public PreguntasFormulario(String contenido, String imagen, String tipo) {
+        this.contenido = contenido;
+        this.imagen = imagen;
+        this.tipo = tipo;
     }
 
     public PreguntasFormulario() {
     }
 
     public String getPregunta() {
-        return pregunta;
+        return contenido;
     }
 
     public void setPregunta(String pregunta) {
-        this.pregunta = pregunta;
+        this.contenido = pregunta;
     }
 
     public String getImagen() {
@@ -26,5 +30,21 @@ public class PreguntasFormulario {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public String getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

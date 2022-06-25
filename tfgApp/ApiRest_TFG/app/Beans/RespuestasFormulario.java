@@ -2,11 +2,13 @@ package Beans;
 
 public class RespuestasFormulario {
     private String idPregunta;
+    private String idFormulario;
     private String Valor;
 
-    public RespuestasFormulario(String idPregunta, String Valor) {
+    public RespuestasFormulario(String idPregunta, String idFormulario, String valor) {
         this.idPregunta = idPregunta;
-        this.Valor = Valor;
+        this.idFormulario = idFormulario;
+        Valor = valor;
     }
 
     public RespuestasFormulario() {
@@ -26,5 +28,13 @@ public class RespuestasFormulario {
 
     public void setValor(String valor) {
         this.Valor = valor;
+    }
+
+    public String getIdFormulario() {
+        return idFormulario;
+    }
+
+    public void setIdFormulario(String idFormulario) {
+        this.idFormulario = idFormulario;
     }
 }

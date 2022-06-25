@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class NotaController extends Controller {
+    /*
     private static final Logger logger = LoggerFactory.getLogger("controller");
     public Result create(Http.Request request, int idUsuarios, int idResultado) throws SQLException, ClassNotFoundException {
         System.out.println("Información");
@@ -117,4 +118,6 @@ public class NotaController extends Controller {
         return ok(ApplicationUtil.createResponse("Usuario with id:"+idUsuario+"resultado with id:"+idResultado+" and Nota with id:" + id +" deleted", true));
     }
 
+
+     */
 }

@@ -11,11 +11,10 @@ import play.mvc.Result;
 import services.UsuarioBBDD;
 import utils.ApplicationUtil;
 
-import java.io.StringWriter;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
+
 
 
 public class UsuarioController extends Controller  {
@@ -105,15 +104,9 @@ public class UsuarioController extends Controller  {
         return ok(ApplicationUtil.createResponse(jsonObject, true));
     }
 
-    public Result delete(Http.Request request) throws SQLException, ClassNotFoundException {
-        logger.debug("In UsuarioController.retrieve(), delete usuarios");
-        if (!UsuarioBBDD.getInstance().deleteUsuario()) {
-            return notFound(ApplicationUtil.createResponse("Usuarios are empty", false));
-        }
-        return ok(ApplicationUtil.createResponse("All Usuarios are deleted", true));
-    }
 
-    public Result deleteById(Http.Request request,int id) throws SQLException, ClassNotFoundException {
+
+    public Result delete(Http.Request request,int id) throws SQLException, ClassNotFoundException {
         logger.debug("In UsuarioController.retrieve(), delete usuario with id: {}",id);
         if (!UsuarioBBDD.getInstance().deleteUsuario(id)) {
             return notFound(ApplicationUtil.createResponse("Usuario with id:" + id + " not found", false));

@@ -18,7 +18,7 @@ public class NotaBBDD extends ConexionBBDD{
         }
         return instance;
     }
-
+/*
     public Nota addNota(Nota nota, int idUsuarios,int idResultado) throws SQLException, ClassNotFoundException {
         int identificador= -1;
 
@@ -329,4 +329,6 @@ public class NotaBBDD extends ConexionBBDD{
         }
         return valor;
     }
+
+ */
 }
