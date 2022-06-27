@@ -7,9 +7,9 @@ import java.sql.*;
 public class ConexionBBDD {
 
     protected static final String driver = "com.mysql.jdbc.Driver";
-    protected static final String user = "tfg";
+    protected static final String user = "root";
    // protected static final String pass = "root";
-    protected static final String pass = "tfg_pass";
+    protected static final String pass = "1234";
    // protected static final String pass = "rootroot";
     //protected static final String url = "jdbc:mysql://tfg.cecyizpnv1pv.eu-west-3.rds.amazonaws.com:3306";
     //protected static final String url = "jdbc:mysql://localhost:3306";
