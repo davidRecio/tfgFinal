@@ -40,7 +40,7 @@ public class NotaBBDD extends ConexionBBDD{
             prueba.next();
             identificador=prueba.getInt(1);
             System.out.println("la fila es " + identificador );
-            String patron = "/usuarios/"+ idUsuarios+"/notas/";
+            String patron = "/usuarios/"+ idUsuarios+"/notas/"+ identificador;
             String url = patron+identificador;
             createStatement.executeUpdate("UPDATE  tfg.nota set url ='" + url + "' where idNota = "+ identificador + ";");
 
