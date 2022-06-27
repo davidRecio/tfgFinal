@@ -1,7 +1,10 @@
 package Principal;
 
 import Beans.Formulario;
+import Beans.Nota;
 import Beans.RespuestasFormulario;
+import Beans.Usuario;
+import services.UsuarioBBDD;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -256,6 +259,54 @@ public class Model {
 
 
         return result;
+
+    }
+
+    public ArrayList<String> sugerencia(Nota nota,int idUsuario){
+        ArrayList<String> sugerencia= new ArrayList<>();
+        int horaEstimada= nota.getTiempoEstudio();
+        String riesgo="bajo";
+        Usuario usuario = (new UsuarioBBDD().getUsuario(idUsuario));
+        int puntuacion= nota.getPuntuacion();
+        int nivelRiesgo=0;
+
+        if(puntuacion<7){
+            nivelRiesgo=nivelRiesgo+1;
+        }
+        if(puntuacion<5){
+            nivelRiesgo=nivelRiesgo+1;
+        }
+        if(puntuacion<3){
+            nivelRiesgo=nivelRiesgo+1;
+        }
+        if(puntuacion<1){
+            nivelRiesgo=nivelRiesgo+1;
+        }
+
+
+        if (usuario.getNivelConcentracion().equals("alto") == false) {
+            nivelRiesgo=nivelRiesgo+1;
+        }
+
+        //si es menor de dos no hay cambios
+
+        if(nivelRiesgo==2){
+            horaEstimada=horaEstimada*nivelRiesgo;
+            riesgo="medio";
+        }
+        if(nivelRiesgo<5){
+            horaEstimada=horaEstimada*nivelRiesgo+200;
+            riesgo="alto";
+        }
+        if(nivelRiesgo==5){
+            horaEstimada=horaEstimada*nivelRiesgo+300;
+            riesgo="alto";
+        }
+
+        sugerencia.add(horaEstimada+"");
+        sugerencia.add(riesgo);
+
+        return  sugerencia;
 
     }
 }

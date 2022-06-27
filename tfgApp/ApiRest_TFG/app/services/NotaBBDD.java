@@ -1,7 +1,9 @@
 package services;
 
 import Beans.Nota;
+import Principal.Model;
 
+import javax.crypto.MacSpi;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class NotaBBDD extends ConexionBBDD{
-
+    Model model= new Model();
     private static NotaBBDD instance;
     public static NotaBBDD getInstance() {
         if (instance == null) {
@@ -22,13 +24,14 @@ public class NotaBBDD extends ConexionBBDD{
     public Nota addNota(Nota nota, int idUsuarios) throws SQLException, ClassNotFoundException {
         int identificador= -1;
 
+
         if (conector() == true) {
 
 
 
             String asignatura= nota.getAsignatura();
-            String puntuacion= nota.getPuntuacion();
-            String tiempoEstudio= nota.getTiempoEstudio();
+            int puntuacion= nota.getPuntuacion();
+            int tiempoEstudio= nota.getTiempoEstudio();
             String tipo= nota.getTipo();
 
 
@@ -43,6 +46,17 @@ public class NotaBBDD extends ConexionBBDD{
 
             nota.setId(identificador);
             nota.setUrl(patron);
+
+            try {
+                ArrayList sugerencia= model.sugerencia(nota,idUsuarios);
+                nota.setRiesgo(sugerencia.get(1).toString());
+                nota.setTiempoRecomendado(Integer.parseInt(sugerencia.get(0).toString()));
+                updateNota(nota,idUsuarios,identificador);
+
+            }catch (Exception e){
+
+            }
+
 
             con.close();
 
@@ -81,9 +95,9 @@ public class NotaBBDD extends ConexionBBDD{
                             nota.setUrl(rS.getString("url"));
                             nota.setIdUsuario(Integer.parseInt(rS.getString("idUsuario")));
                             nota.setAsignatura(rS.getString("asignatura"));
-                            nota.setTiempoEstudio(rS.getString("tiempoEstudio"));
-                            nota.setTiempoRecomendado(rS.getString("tiempoRecomendado"));
-                            nota.setPuntuacion(rS.getString("puntuacion"));
+                            nota.setTiempoEstudio(Integer.parseInt(rS.getString("tiempoEstudio")));
+                            nota.setTiempoRecomendado(Integer.parseInt(rS.getString("tiempoRecomendado")));
+                            nota.setPuntuacion(Integer.parseInt( rS.getString("puntuacion")));
                             nota.setRiesgo(rS.getString("riesgo"));
                             nota.setTipo(rS.getString("tipo"));
 
@@ -135,12 +149,11 @@ public class NotaBBDD extends ConexionBBDD{
                         nota.setUrl(rS.getString("url"));
                         nota.setIdUsuario(Integer.parseInt(rS.getString("idUsuario")));
                         nota.setAsignatura(rS.getString("asignatura"));
-                        nota.setTiempoEstudio(rS.getString("tiempoEstudio"));
-                        nota.setTiempoRecomendado(rS.getString("tiempoRecomendado"));
-                        nota.setPuntuacion(rS.getString("puntuacion"));
+                        nota.setTiempoEstudio(Integer.parseInt(rS.getString("tiempoEstudio")));
+                        nota.setTiempoRecomendado(Integer.parseInt(rS.getString("tiempoRecomendado")));
+                        nota.setPuntuacion(Integer.parseInt( rS.getString("puntuacion")));
                         nota.setRiesgo(rS.getString("riesgo"));
                         nota.setTipo(rS.getString("tipo"));
-                        notasLista.add(nota);
 
 
                     }
@@ -182,12 +195,11 @@ public class NotaBBDD extends ConexionBBDD{
                         nota.setUrl(rS.getString("url"));
                         nota.setIdUsuario(Integer.parseInt(rS.getString("idUsuario")));
                         nota.setAsignatura(rS.getString("asignatura"));
-                        nota.setTiempoEstudio(rS.getString("tiempoEstudio"));
-                        nota.setTiempoRecomendado(rS.getString("tiempoRecomendado"));
-                        nota.setPuntuacion(rS.getString("puntuacion"));
+                        nota.setTiempoEstudio(Integer.parseInt(rS.getString("tiempoEstudio")));
+                        nota.setTiempoRecomendado(Integer.parseInt(rS.getString("tiempoRecomendado")));
+                        nota.setPuntuacion(Integer.parseInt( rS.getString("puntuacion")));
                         nota.setRiesgo(rS.getString("riesgo"));
                         nota.setTipo(rS.getString("tipo"));
-                        notasLista.add(nota);
 
                     }
                 } catch (SQLException ex) {
@@ -220,15 +232,15 @@ public class NotaBBDD extends ConexionBBDD{
             if (conector() == true) {
 
                 String asignatura = nota.getAsignatura();
-                String puntuacion = nota.getPuntuacion();
-                String tiempoEstudio = nota.getTiempoEstudio();
+                int puntuacion = nota.getPuntuacion();
+                int tiempoEstudio = nota.getTiempoEstudio();
                 String tipo = nota.getTipo();
 
-                String tiempoRecomendado = nota.getTiempoRecomendado();
+                int tiempoRecomendado = nota.getTiempoRecomendado();
                 String riesgo = nota.getRiesgo();
 
                 String queryBBDD = "";
-                if (riesgo==null && tiempoRecomendado==null) {
+                if (riesgo==null ) {
                     //para el usuario
                     queryBBDD = "update tfg.nota set asignatura='" + asignatura + "', puntuacion=" + puntuacion + ", tipo='" + tipo + "', tiempoEstudio=" + tiempoEstudio + " where idNota=" + id + " and idUsuario='" + idUsuario + "' ;";
 

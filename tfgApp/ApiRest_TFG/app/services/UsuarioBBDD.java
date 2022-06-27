@@ -41,7 +41,7 @@ if(buscarUsuarioNombre(usuario.getNombre())==false){
         }else {
     usuario=null;
 }
-        }
+       }
         return usuario;
     }
 
@@ -52,7 +52,7 @@ if(buscarUsuarioNombre(usuario.getNombre())==false){
         try {
             if(conector()==true){
                 System.out.println("Antes de guardar la query");
-                String queryBBDD = "select usuario.idUsuario, usuario.url,usuario.nombre, usuario.pass from tfg.usuario where usuario.idUsuario=" + id + ";";
+                String queryBBDD = "select usuario.idUsuario, usuario.url,usuario.nombre, usuario.pass , usuario.aptitudes ,usuario.intereses, usuario.nivelConcentracion from tfg.usuario where usuario.idUsuario=" + id + ";";
                 System.out.println("Después de la query");
 
                 try {
@@ -76,9 +76,9 @@ if(buscarUsuarioNombre(usuario.getNombre())==false){
                                  usu.setUrl(rS.getString("usuario.url"));
                                  usu.setNombre(rS.getString("usuario.nombre"));
                                  usu.setPass(rS.getString("usuario.pass"));
-                                 usu.setAptitudes(rS.getString("aptitudes"));
-                                 usu.setIntereses(rS.getString("intereses"));
-                                 usu.setNivelConcentracion(rS.getString("nivelConcentracion"));
+                                 usu.setAptitudes(rS.getString("usuario.aptitudes"));
+                                 usu.setIntereses(rS.getString("usuario.intereses"));
+                                 usu.setNivelConcentracion(rS.getString("usuario.nivelConcentracion"));
 
 
                                 System.out.println("Al final del primer statement");
@@ -258,32 +258,34 @@ if(buscarUsuarioNombre(usuario.getNombre())==false){
 
     private boolean crearFormularios(int idUsuario){
         boolean valor= true;
+        int idFormulario=0;
         //le crea los formularios
         try {
             //CHASIDE
-            createStatement.executeUpdate("INSERT INTO tfg.formulario (idUsuario,tipo) VALUES ('" + idUsuario + "', 'C');" , Statement.RETURN_GENERATED_KEYS);
+            createStatement.executeUpdate("INSERT INTO tfg.formulario (idUsuario,tipo) VALUES (" + idUsuario + ", 'C');" , Statement.RETURN_GENERATED_KEYS);
 
         ResultSet rs = createStatement.getGeneratedKeys();
         rs.next();
-        idUsuario=rs.getInt(1);
+            idFormulario=rs.getInt(1);
 
         System.out.println("la fila es " + idUsuario );
         String patron = "/usuarios/formularios/";
         String url = patron+"C";
-        createStatement.executeUpdate("UPDATE  tfg.formulario set url ='" + url + "' where idFormulario = "+ idUsuario + ";");
+        createStatement.executeUpdate("UPDATE  tfg.formulario set url ='" + url + "' where idFormulario = "+ idFormulario + ";");
 
         //TOULOUSE
-            createStatement.executeUpdate("INSERT INTO tfg.formulario (idUsuario,tipo) VALUES ('" + idUsuario + "', 'T');" , Statement.RETURN_GENERATED_KEYS);
+            createStatement.executeUpdate("INSERT INTO tfg.formulario (idUsuario,tipo) VALUES (" + idUsuario + ", 'T');" , Statement.RETURN_GENERATED_KEYS);
 
              rs = createStatement.getGeneratedKeys();
             rs.next();
-            idUsuario=rs.getInt(1);
+            idFormulario=rs.getInt(1);
 
             System.out.println("la fila es " + idUsuario );
              patron = "/usuarios/formularios/";
              url = patron+"T";
-            createStatement.executeUpdate("UPDATE  tfg.formulario set url ='" + url + "' where idFormulario = "+ idUsuario + ";");
-        } catch (SQLException e) {
+            createStatement.executeUpdate("UPDATE  tfg.formulario set url ='" + url + "' where idFormulario = "+ idFormulario + ";");
+        }
+        catch (SQLException e) {
             valor= false;
 
 
@@ -297,10 +299,10 @@ if(buscarUsuarioNombre(usuario.getNombre())==false){
 
         try {
 
-         ResultSet   rS = createStatement.executeQuery("Select * from tfg.usuario where usuario.nombre= '"+nombre+"';");
-
-
-            if (rS == null){
+         ResultSet   rS = createStatement.executeQuery("Select usuario.nombre from tfg.usuario where usuario.nombre= '"+nombre+"';");
+            rS.next();
+           String nomreAux= rS.getString("usuario.nombre");
+            if (nomreAux.isEmpty()){
                 valor= false;
 
             }
