@@ -24,7 +24,7 @@ public class UsuarioBBDD extends ConexionBBDD{
     public Usuario addUsuario(Usuario usuario) throws SQLException, ClassNotFoundException {
         int identificador= -1;
         if (conector() == true) {
-
+if(buscarUsuarioNombre(usuario.getNombre())==false){
             String nombre= usuario.getNombre();
             String pass= usuario.getPass();
             createStatement.executeUpdate("INSERT INTO tfg.usuario (nombre,pass) VALUES ('" + nombre + "', '" + pass + "');" , Statement.RETURN_GENERATED_KEYS);
@@ -38,6 +38,9 @@ public class UsuarioBBDD extends ConexionBBDD{
             crearFormularios(identificador);
             con.close();
 
+        }else {
+    usuario=null;
+}
         }
         return usuario;
     }
@@ -289,4 +292,24 @@ public class UsuarioBBDD extends ConexionBBDD{
 
     }
 
+    private boolean buscarUsuarioNombre(String nombre){
+        boolean valor= true;
+
+        try {
+
+         ResultSet   rS = createStatement.executeQuery("Select * from tfg.usuario where usuario.nombre= '"+nombre+"';");
+
+
+            if (rS == null){
+                valor= false;
+
+            }
+        } catch (SQLException e) {
+            valor= false;
+
+
+        }
+        return valor;
+
+    }
 }

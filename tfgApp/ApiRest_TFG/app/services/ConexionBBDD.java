@@ -80,7 +80,7 @@ public class ConexionBBDD {
                         "  `idRespuesta` int(11) NOT NULL AUTO_INCREMENT,\n" +
                         "  `idPregunta` int(11) NOT NULL,\n" +
                         "  `idFormulario` int(11) NOT NULL,\n" +
-                        "  `valor` varchar(3) NOT NULL,\n" +
+                        "  `valor` varchar(300) NOT NULL,\n" +
                         "  PRIMARY KEY (`idRespuesta`),\n" +
                         "  KEY `idPregunta_respuesta_idx` (`idPregunta`),\n" +
                         "  KEY `idFormulario_idx` (`idFormulario`),\n" +

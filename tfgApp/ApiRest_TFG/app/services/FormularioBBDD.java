@@ -51,14 +51,14 @@ public class FormularioBBDD extends ConexionBBDD{
 
 
                     } //TOULOUSE
-                    else if (tipo.equals("T") && listaidRespuestas.size() < 6) {
+                    else if (tipo.equals("T") && listaidRespuestas.size() < 3) {
                         for (RespuestasFormulario respuesta : listaidRespuestas) {
 
-                            createStatement.executeUpdate("INSERT INTO tfg.respuesta (idPregunta,valor) VALUES ('" + respuesta.getIdPregunta() + "', '" + respuesta.getValor() + "');");
+                            createStatement.executeUpdate("INSERT INTO tfg.respuesta (idPregunta, idFormulario, valor) VALUES (" + respuesta.getIdPregunta() + ", " + idFormulario + ", '" + respuesta.getValor() + "');");
 
 
                         }
-                        createStatement.executeUpdate("UPDATE  tfg.usuario set nivelConcentracion ='" + model.nivelConcentracion(formulario) + "' where idUsuario = " + identificador + ";");
+                        createStatement.executeUpdate("UPDATE  tfg.usuario set nivelConcentracion ='" + model.nivelConcentracion(formulario) + "' where idUsuario = " + idUsuario + ";");
                     } else {
                         formulario1 = null;
                     }

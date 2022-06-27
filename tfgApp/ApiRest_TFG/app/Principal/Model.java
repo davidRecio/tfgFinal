@@ -210,7 +210,7 @@ public class Model {
 
         //Donde: A es acierto, E es error y O es omisión
 
-
+       int contador=0;
         for (RespuestasFormulario rf: formulario.getRespuestasFormularioArray()) {
 
 
@@ -221,7 +221,7 @@ public class Model {
                     for(int i=0;i<resultadoToulouse.length-1;i++){
 
                        int respuestaUsuario =Integer.parseInt(arrayFilas[i]);
-                        int respuestaCorrecta= resultadoToulouse[i][0];
+                        int respuestaCorrecta= resultadoToulouse[i][contador];
 
                         if(respuestaUsuario<respuestaCorrecta){
                             omisionTotal=omisionTotal+(respuestaCorrecta-respuestaUsuario);
@@ -238,19 +238,20 @@ public class Model {
             }
 
 
-            CCTotal=(aciertosTotales-errorTotal)/(aciertosTotales-omisionTotal);
-            IGAPTotal=aciertosTotales-(errorTotal-omisionTotal);
-            ICITotal=((aciertosTotales-errorTotal)/39)*100;
 
-            if (CCTotal>0.7){
-                result="alto";
-            } else if (CCTotal>0.49) {
-                result="medio";
-            }else {
-                result="bajo";
-            }
+            contador++;
 
+        }
+        CCTotal=(aciertosTotales-errorTotal)/(aciertosTotales-omisionTotal);
+        IGAPTotal=aciertosTotales-(errorTotal-omisionTotal);
+        ICITotal=((aciertosTotales-errorTotal)/39)*100;
 
+        if (CCTotal>0.7){
+            result="alto";
+        } else if (CCTotal>0.49) {
+            result="medio";
+        }else {
+            result="bajo";
         }
 
 
