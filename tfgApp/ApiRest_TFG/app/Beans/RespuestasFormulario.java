@@ -19,6 +19,7 @@ public class RespuestasFormulario {
         return numeroPregunta;
     }
 
+
     public void setNumeroPregunta(int numeroPregunta) {
         this.numeroPregunta = numeroPregunta;
     }

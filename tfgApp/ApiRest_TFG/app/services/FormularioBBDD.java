@@ -8,9 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Principal.*;
 
 public class FormularioBBDD extends ConexionBBDD{
-
+ private Model model = new Model();
     private static FormularioBBDD instance;
     public static FormularioBBDD getInstance() {
         if (instance == null) {
@@ -33,33 +34,39 @@ public class FormularioBBDD extends ConexionBBDD{
             //comprueba que esixte
             if(idFormulario!=-1) {
 
+                //comprueba que no tenga preguntas
+                if (obtenerRespuestas(idFormulario).isEmpty()) {
+                    //comprobar si estan todas las respuestas
+                    //CHASIDE
+                    if (tipo.equals("C") && listaidRespuestas.size() == 97) {
 
-                //comprobar si estan todas las respuestas
-                //CHASIDE
-                if (tipo.equals("C") && listaidRespuestas.size() == 97) {
+                        for (RespuestasFormulario respuesta : listaidRespuestas) {
 
-                    for (RespuestasFormulario respuesta : listaidRespuestas) {
-
-                        createStatement.executeUpdate("INSERT INTO tfg.respuesta (idPregunta, idFormulario, valor) VALUES (" + respuesta.getIdPregunta() + ", " + idFormulario + ", '" + respuesta.getValor() + "');");
+                            createStatement.executeUpdate("INSERT INTO tfg.respuesta (idPregunta, idFormulario, valor) VALUES (" + respuesta.getIdPregunta() + ", " + idFormulario + ", '" + respuesta.getValor() + "');");
 
 
+                        }
+                        ArrayList chasideResult = model.chasideResult(formulario);
+                        createStatement.executeUpdate("UPDATE  tfg.usuario set aptitudes ='" + chasideResult.get(0) + "',  intereses = '" + chasideResult.get(1) + "' where idUsuario = " + idUsuario + ";");
+
+
+                    } //TOULOUSE
+                    else if (tipo.equals("T") && listaidRespuestas.size() < 6) {
+                        for (RespuestasFormulario respuesta : listaidRespuestas) {
+
+                            createStatement.executeUpdate("INSERT INTO tfg.respuesta (idPregunta,valor) VALUES ('" + respuesta.getIdPregunta() + "', '" + respuesta.getValor() + "');");
+
+
+                        }
+                        createStatement.executeUpdate("UPDATE  tfg.usuario set nivelConcentracion ='" + model.nivelConcentracion(formulario) + "' where idUsuario = " + identificador + ";");
+                    } else {
+                        formulario1 = null;
                     }
-                } //TOULOUSE
-                else if (tipo.equals("T") && listaidRespuestas.size() < 6) {
-                    for (RespuestasFormulario respuesta : listaidRespuestas) {
 
-                        createStatement.executeUpdate("INSERT INTO tfg.respuesta (idPregunta,valor) VALUES ('" + respuesta.getIdPregunta() + "', '" + respuesta.getValor() + "');");
-
-
-                    }
-                }else {
-                    formulario1=null;
                 }
 
+
             }
-
-
-
         }
         }
         catch (SQLException ex) {
@@ -309,5 +316,6 @@ public class FormularioBBDD extends ConexionBBDD{
         }
         return idFormulario;
     }
+
 
 }
