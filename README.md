@@ -9,12 +9,12 @@ Una vez instalado, te pedirá reiniciar el ordenador, si este no posee el WSL 2 
 
 En el proyecto se ha desarrollado dos ficheros para realizar el apagado e inicio de los dockers, estos son "run" y "stop"
 
-##RUN
+###RUN
 
 Este fichero es el encargado de compilar las imágenes, crea una subnet para que puedan comunicarse la base de datos y la api, levantar el servidor sbt y levantar la base de datos.
 Se tiene que esperar 30 segundos, dado que el contenedor de mysql necesita ese tiempo para levantarse correctamente y por último se levanta la API.
 
-##STOP
+###STOP
 Es el encargado de apagar los elementos levantados borrando los nombres de las imágenes para que se puedan levantar de nuevo ejecutar de nuevo el fichero "run"
 
 ###Pasos para realizar pruebas
