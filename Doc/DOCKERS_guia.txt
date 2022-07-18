@@ -1,0 +1,32 @@
+DOCKERS
+
+
+en un docker levantado te puedes meter dentro del conteiner y desde ahi puedes lanzar ejecuciones 
+
+cada label q pongas en el docker(Run,env,..) creara un layer(capas) de la imagen, cada capa tirnr un id, y se pueden usar en otros dockers que usan la ejecucion, esto esta cargado y precompilado tardara menos, es cache
+
+from es q imagen base usare para mi dokerfile
+
+User a partir de aqui uso el usuario root
+
+Run un comando por consola para la maquina virtual
+
+env es una variable de entorno
+
+workdir defines el entorno de trabajo en que pàrte eestas ej workdir /home
+
+CMD es la eje q se lanza por defecto, una vez lanzado el docker
+
+COPY quieres copiar una carèta de fuera en el docker
+
+
+
+
+Aviso, esto funciona dado que el run y el stop estan al mismo nivel del dockerfile(comando Copy)
+
+un docker no almacena informacion propia en el momento que se muere, a no ser que tenga un pv y pvc (volumenes), en mi caso es mysql crea uno nuevo cada vez, con nombre aleatorio, cada vez que se ejecute
+
+networks
+no se deben usar, pero las usamos`dado que estamos en un entorno aislado
+crrea una red a la cual un conjunto de redes se conectan para comunicarse los dockers
+la ip statica es para que la aplicacion coincida en su configuracion 
