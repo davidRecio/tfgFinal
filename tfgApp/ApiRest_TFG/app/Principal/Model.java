@@ -294,12 +294,16 @@ public class Model {
             horaEstimada=horaEstimada*nivelRiesgo;
             riesgo="medio";
         }
-        if(nivelRiesgo<5){
-            horaEstimada=horaEstimada*nivelRiesgo+200;
+        if(nivelRiesgo>2 && nivelRiesgo<5){
+            horaEstimada=horaEstimada*nivelRiesgo;
+            riesgo="medio";
+        }
+        if(nivelRiesgo>5){
+            horaEstimada=horaEstimada*nivelRiesgo+300;
             riesgo="alto";
         }
-        if(nivelRiesgo==5){
-            horaEstimada=horaEstimada*nivelRiesgo+300;
+        if(nivelRiesgo==5 ){
+            horaEstimada=horaEstimada*nivelRiesgo+200;
             riesgo="alto";
         }
 

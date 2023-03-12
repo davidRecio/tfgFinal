@@ -6,7 +6,7 @@ ThisBuild / version := "1.0-SNAPSHOT"
 lazy val root = (project in file("."))
   .enablePlugins(PlayJava)
   .settings(
-    name := """pruebaApi2""",
+    name := """pruebaApi""",
     libraryDependencies ++= Seq(
       guice,
       javaJpa,
